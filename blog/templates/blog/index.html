@@ -14,11 +14,6 @@
       <div class="row">
         <div class="col-md-8">
           <div class="row">
-            <div class="col-md-12">
-              <div class="section-title">
-                <h2>Most Read</h2>
-              </div>
-            </div>
 
             {% for post in posts %}
               <div class="col-md-12">
@@ -45,17 +40,17 @@
             <div class="pagination">
               <span class="step-links">
                 {% if page_obj.has_previous %}
-                  <a href="?page=1">&laquo; first</a>
-                  <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                  <a href="?page=1">&laquo;</a>
+                  <a href="?page={{ page_obj.previous_page_number }}">пред</a>
                 {% endif %}
 
                 <span class="current">
-                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                  Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
                 </span>
 
                 {% if page_obj.has_next %}
-                  <a href="?page={{ page_obj.next_page_number }}">next</a>
-                  <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                  <a href="?page={{ page_obj.next_page_number }}">след</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
                 {% endif %}
               </span>
             </div>
@@ -64,56 +59,25 @@
         </div>
         <div class="col-md-4">
 
-          <div class="aside-widget">
-            <div class="section-title">
-              <h2>Most Read</h2>
-            </div>
-            <div class="post post-widget">
-              <a class="post-img" href="blog-post.html"><img src="{% static 'img/widget-1.jpg' %}" alt=""></a>
-              <div class="post-body">
-                <h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And
-                  Development Tools</a></h3>
-              </div>
-            </div>
-            <div class="post post-widget">
-              <a class="post-img" href="blog-post.html"><img src="{% static 'img/widget-2.jpg' %}" alt=""></a>
-              <div class="post-body">
-                <h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website
-                  Design Mockup Into Code Automatically</a></h3>
-              </div>
-            </div>
-            <div class="post post-widget">
-              <a class="post-img" href="blog-post.html"><img src="{% static 'img/widget-3.jpg' %}" alt=""></a>
-              <div class="post-body">
-                <h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The
-                  Backend Development Block!</a></h3>
-              </div>
-            </div>
-            <div class="post post-widget">
-              <a class="post-img" href="blog-post.html"><img src="{% static 'img/widget-4.jpg' %}" alt=""></a>
-              <div class="post-body">
-                <h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And
-                  Development Tools</a></h3>
-              </div>
-            </div>
-          </div>
 
           <div class="aside-widget">
             <div class="section-title">
-              <h2>Catagories</h2>
+              <h2>Категории</h2>
             </div>
             <div class="category-widget">
               <ul>
-                <li><a href="index.html#" class="cat-1">Web Design<span>340</span></a></li>
-                <li><a href="index.html#" class="cat-2">JavaScript<span>74</span></a></li>
-                <li><a href="index.html#" class="cat-4">JQuery<span>41</span></a></li>
-                <li><a href="index.html#" class="cat-3">CSS<span>35</span></a></li>
+                {% for category in categories %}
+                  <li><a href="{{ category.get_absolute_url }}" class="cat-{{ category.pk }}">{{ category.title }} <span>{{category.pk }}</span></a></li>
+                {% endfor %}
               </ul>
             </div>
           </div>
 
 
           <div class="aside-widget">
+            <div class="section-title">
+              <h2>Теги</h2>
+            </div>
             <div class="tags-widget">
               <ul>
                 <li><a href="index.html#">Chrome</a></li>

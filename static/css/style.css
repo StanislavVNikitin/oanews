@@ -29,6 +29,16 @@ RESPONSIVE
 /*----------------------------*\
 	typography
 \*----------------------------*/
+
+@font-face {
+  font-family: "Pacifico";
+  font-style: normal;
+  font-weight: 400;
+  /* Браузер сначала попробует найти шрифт локально */
+  src: local("Pacifico"),
+       url("/fonts/Pacifico-Regular.ttf") format("ttf")
+}
+
  body {
      font-family: 'Nunito', sans-serif;
      font-size: 16px;
@@ -501,6 +511,10 @@ RESPONSIVE
      content: '/';
      display: inline-block;
      margin: 0px 10px;
+}
+
+.header-text-h1{
+    font-family: 'Pacifico', cursive;
 }
 /*=========================================================
 	POST
