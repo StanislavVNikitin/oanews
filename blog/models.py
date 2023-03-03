@@ -4,6 +4,7 @@ from django.urls import reverse
 class Category(models.Model):
     title = models.CharField(max_length=255, verbose_name="Название")
     slug = models.SlugField(max_length=255, verbose_name="Url категории", unique=True)
+    deleted = models.BooleanField(default=False, verbose_name='Удалено')
 
     def __str__(self):
         return self.title
@@ -21,8 +22,13 @@ class Tag(models.Model):
     title = models.CharField(max_length=50, verbose_name="Название")
     slug = models.SlugField(max_length=50, verbose_name="Url тэга", unique=True)
 
+
     def __str__(self):
         return self.title
+
+    def delete(self, *args):
+        self.deleted = True
+        self.save()
 
     class Meta:
         verbose_name = "Тэг"
@@ -40,9 +46,14 @@ class Post(models.Model):
     views = models.IntegerField(default=0, verbose_name="Количество просмотров")
     category = models.ForeignKey("Category", on_delete=models.PROTECT, related_name="posts", verbose_name="Категория")
     tags = models.ManyToManyField("Tag", blank=True, related_name="posts", verbose_name="Тэг")
+    deleted = models.BooleanField(default=False, verbose_name='Удалено')
 
     def __str__(self):
         return self.title
+
+    def delete(self, *args):
+        self.deleted = True
+        self.save()
 
     def get_absolute_url(self):
         return reverse("post", kwargs={"slug": self.slug})
