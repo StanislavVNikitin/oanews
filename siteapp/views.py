@@ -24,3 +24,13 @@ class PageView(TemplateView):
         print(slug)
         context['page'] = get_object_or_404(Page, slug=slug)
         return context
+
+
+class ContactPage(ListView):
+    model = Page
+    template_name = "siteapp/contacts.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = get_object_or_404(Page, slug='contacts')
+        return context

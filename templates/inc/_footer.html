@@ -3,16 +3,16 @@
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top navbar navbar-dark rounded-3 bg-gradient" style="background-color: #56000E;">
     <p class="col-xl-6 col-xxl-6 mb-0 fs-4 fst-italic px-2" style="color: #B1B1B1;"><span class="fs-6 fst-normal"> &copy; 2010-2023</span> Органические ацидемии</p>
 
-    <a href="/" class="col-xxl-1 d-flex align-items-center justify-content-center mb-3 mb-xl-0 me-xl-auto text-decoration-none d-none d-xxl-block">
+    <a href="{% url 'siteapp:home' %}" class="col-xxl-1 d-flex align-items-center justify-content-center mb-3 mb-xl-0 me-xl-auto text-decoration-none d-none d-xxl-block">
       <img src="{% static 'assets/img/logo.png' %}" alt="Logo" style="width: 40px;">
     </a>
 
     <ul class="nav col-xl-6 col-xxl-5 justify-content-end px-2" >
-      <li class="nav-item"><a href="#" class="nav-link px-2" style="color: #B1B1B1;">Главная</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2" style="color: #B1B1B1;">Блог</a></li>
+      <li class="nav-item"><a href="{% url 'siteapp:home' %}" class="nav-link px-2" style="color: #B1B1B1;">Главная</a></li>
+      <li class="nav-item"><a href="{% url 'blog:home' %}" class="nav-link px-2" style="color: #B1B1B1;">Блог</a></li>
       <li class="nav-item"><a href="#" class="nav-link disabled px-2 text-muted" style="color: #B1B1B1;">ДиетКалькулятор</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2" style="color: #B1B1B1;">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2" style="color: #B1B1B1;">Контакты</a></li>
+      <li class="nav-item"><a href="{% url 'siteapp:contacts' %}" class="nav-link px-2" style="color: #B1B1B1;">Контакты</a></li>
     </ul>
   </footer>
 </div>
