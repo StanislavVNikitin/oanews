@@ -1,8 +1,0 @@
-<div>
-  <ul class="nav-menu nav navbar-nav">
-    <li><a href="{% url 'home' %}">Главная</a></li>
-    {% for item in categories %}
-      <li class="cat-{{item.pk}}"><a href="{{ item.get_absolute_url}}">{{ item.title }}</a></li>
-    {% endfor %}
-  </ul>
-</div>

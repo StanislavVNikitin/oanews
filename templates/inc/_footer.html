@@ -1,72 +1,18 @@
 {% load static %}
-<footer id="footer">
+<div class="fixed-bottom col-lg-10 mx-auto">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top navbar navbar-dark rounded-3" style="background-color: #56000E;">
+    <p class="col-xl-6 col-xxl-6 mb-0 fs-4 fst-italic px-2" style="color: #B1B1B1;"><span class="fs-6 fst-normal"> &copy; 2010-2023</span> Органические ацидемии</p>
 
-  <div class="container">
+    <a href="/" class="col-xxl-1 d-flex align-items-center justify-content-center mb-3 mb-xl-0 me-xl-auto text-decoration-none d-none d-xxl-block">
+      <img src="{% static 'assets/img/logo.png' %}" alt="Logo" style="width: 40px;">
+    </a>
 
-    <div class="row">
-      <div class="col-md-5">
-        <div class="footer-widget">
-          <div class="footer-logo">
-            <a href="index.html" class="logo"><img src="{% static 'img/logo.png' %}" alt=""></a>
-          </div>
-          <ul class="footer-nav">
-            <li><a href="index.html#">Privacy Policy</a></li>
-            <li><a href="index.html#">Advertisement</a></li>
-          </ul>
-          <div class="footer-copyright">
-            <span>&copy;
-              Copyright &copy;
-              <script>document.write(new Date().getFullYear());</script> All rights reserved | This
-              template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                href="https://colorlib.com" target="_blank">Colorlib</a>
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="footer-widget">
-              <h3 class="footer-title">About Us</h3>
-              <ul class="footer-links">
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="index.html#">Join Us</a></li>
-                <li><a href="contact.html">Contacts</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="footer-widget">
-              <h3 class="footer-title">Catagories</h3>
-              <ul class="footer-links">
-                <li><a href="category.html">Web Design</a></li>
-                <li><a href="category.html">JavaScript</a></li>
-                <li><a href="category.html">Css</a></li>
-                <li><a href="category.html">Jquery</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="footer-widget">
-          <h3 class="footer-title">Join our Newsletter</h3>
-          <div class="footer-newsletter">
-            <form>
-              <input class="input" type="email" name="newsletter" placeholder="Enter your email">
-              <button class="newsletter-btn"><i class="fa fa-paper-plane"></i></button>
-            </form>
-          </div>
-          <ul class="footer-social">
-            <li><a href="index.html#"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="index.html#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="index.html#"><i class="fa fa-google-plus"></i></a></li>
-            <li><a href="index.html#"><i class="fa fa-pinterest"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-</footer>
+    <ul class="nav col-xl-6 col-xxl-5 justify-content-end px-2" >
+      <li class="nav-item"><a href="#" class="nav-link px-2" style="color: #B1B1B1;">Главная</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2" style="color: #B1B1B1;">Блог</a></li>
+      <li class="nav-item"><a href="#" class="nav-link disabled px-2 text-muted" style="color: #B1B1B1;">ДиетКалькулятор</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2" style="color: #B1B1B1;">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2" style="color: #B1B1B1;">Контакты</a></li>
+    </ul>
+  </footer>
+</div>

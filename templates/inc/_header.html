@@ -1,70 +1,43 @@
 {% load static %}
-{%load menu %}
-<header id="header">
 
-  <div id="nav">
-
-    <div id="nav-fixed">
-      <div class="container">
-
-        <div class="nav-logo">
-          <a href="{% url 'home' %}" class="logo"><img src="{% static 'img/logo1.png' %}" alt=""></a>
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark rounded-3">
+    <div class="container-fluid">
+        <img class="px-2" src="{% static 'assets/img/logo.png' %}" alt="Logo">
+        <a class="navbar-brand text-danger fs-3 fst-italic" href="#">Органические ацидемии</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Блог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">FAQs</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">Заболевания</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">МетилМалоновая Ацидемия</a></li>
+                        <li><a class="dropdown-item" href="#">Пропионовая Ацидемия</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item disabled" href="#">Другие органические ацидемии</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">ДиетКалькулятор</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <a class="btn btn-outline-secondary disabled" href="#">Вход</a>
+            </form>
         </div>
-        {% show_menu %}
-
-        <!--
-                <ul class="nav-menu nav navbar-nav">
-                    <li><a href="category.html">News</a></li>
-                    <li><a href="category.html">Popular</a></li>
-                    <li class="cat-1"><a href="category.html">Web Design</a></li>
-                    <li class="cat-2"><a href="category.html">JavaScript</a></li>
-                    <li class="cat-3"><a href="category.html">Css</a></li>
-                    <li class="cat-4"><a href="category.html">Jquery</a></li>
-                </ul>-->
-
-
-        <div class="nav-btns">
-          <button class="aside-btn"><i class="fa fa-bars"></i></button>
-          <button class="search-btn"><i class="fa fa-search"></i></button>
-          <div class="search-form">
-            <input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
-            <button class="search-close"><i class="fa fa-times"></i></button>
-          </div>
-        </div>
-
-      </div>
     </div>
-
-
-    <div id="nav-aside">
-
-      <div class="section-row">
-        <ul class="nav-aside-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="contact.html">Contacts</a></li>
-        </ul>
-      </div>
-
-
-      <div class="section-row">
-        <h3>Follow us</h3>
-        <ul class="nav-aside-social">
-          <li><a href="index.html#"><i class="fa fa-facebook"></i></a></li>
-          <li><a href="index.html#"><i class="fa fa-twitter"></i></a></li>
-          <li><a href="index.html#"><i class="fa fa-google-plus"></i></a></li>
-          <li><a href="index.html#"><i class="fa fa-pinterest"></i></a></li>
-        </ul>
-      </div>
-
-
-      <button class="nav-aside-close"><i class="fa fa-times"></i></button>
-
-    </div>
-
-  </div>
-
-
-
-
-</header>
+</nav>
