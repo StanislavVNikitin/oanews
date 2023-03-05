@@ -13,6 +13,7 @@ class PageAdminForm(forms.ModelForm):
 
 class PageAdmin(admin.ModelAdmin):
     form = PageAdminForm
+    prepopulated_fields = {"slug": ("title",)}
     list_display = ('id', 'title', 'slug', 'content', 'created_at', 'updated_at', 'is_published', 'deleted')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'content')
@@ -21,6 +22,7 @@ class PageAdmin(admin.ModelAdmin):
     fields = ('title', 'slug', 'content', 'is_published', 'views', 'created_at', 'updated_at')
     readonly_fields = ('views', 'created_at', 'updated_at')
     save_on_top = True
+    save_as = True
 
 admin.site.register(Page, PageAdmin)
 
