@@ -1,0 +1,8 @@
+<div class="p-4">
+    <h4 class="fst-italic">Тэги</h4>
+    {% for tag in tags %}
+    {% if tag.posts.count > 0 %}
+    <span class="badge bg-secondary"><a class="link-light text-decoration-none" href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></span>
+    {% endif %}
+    {% endfor %}
+</div>

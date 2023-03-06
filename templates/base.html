@@ -8,6 +8,22 @@
     <title>{% block title %} Органические ацидемии {% endblock %}</title>
     <link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <style>
+        .pagination .page-item.active .page-link {
+            background-color: rgb(108,117,125);
+             border-color: rgb(108,117,125);
+        }
+
+        div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
+            background-color: rgb(108,117,125);
+            border-color: rgb(108,117,125);
+        }
+
+        .pagination .page-item.active .page-link:hover {
+            background-color: rgb(108,117,125);
+            border-color: rgb(108,117,125);
+        }
+    </style>
 </head>
 <body>
 

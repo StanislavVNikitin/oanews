@@ -1,0 +1,8 @@
+<div class="grid">
+  {% for post in posts %}
+  <div>
+    <p class="p-0 m-0" > <a class="link-dark text-decoration-none" href="{{post.get_absolute_url }}">{{post.title|truncatechars:40 }}</a></p>
+    <p class="link-secondary" > <small>{{ post.created_at|date:"j E Y" }}</small></p>
+  </div>
+  {% endfor %}
+</div>

@@ -26,6 +26,9 @@ class Tag(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse("blog:tag", kwargs={"slug": self.slug})
+
     def delete(self, *args):
         self.deleted = True
         self.save()
