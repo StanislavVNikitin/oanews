@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'captcha',
     'ckeditor',
     'ckeditor_uploader',
     'siteapp.apps.SiteappConfig',
@@ -142,6 +143,17 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
+ADMIN_MAIL_ADDRESS = env('ADMIN_MAIL_ADDRESS')
+
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+
+
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
@@ -209,3 +221,7 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+CAPTCHA_LETTER_ROTATION = None
+CAPTCHA_NOISE_FUNCTIONS = None
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'

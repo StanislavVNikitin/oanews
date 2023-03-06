@@ -19,14 +19,28 @@
 
             </div>
             <div class="col-lg-6 col-xl-8">
-                <h4>Отправить Нам сообщение:</h4>
-                <form method="post">
-                    <input class="form-control" name="name" placeholder="Имя..."/><br/>
-                    <input class="form-control" name="phone" placeholder="Телефон..."/><br/>
-                    <input class="form-control" name="email" placeholder="E-mail..."/><br/>
-                    <textarea class="form-control" name="text" placeholder="Текст сообщения."
-                              style="height:150px;"></textarea><br/>
-                    <input class="btn btn-primary" type="submit" value="Отправить"/><br/><br/>
+                        {% if messages %}
+
+            {% for message in messages %}
+
+                {% if message.tags == 'error' %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% else %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+
+            {% endif %}
+                <h4>Обратная связь:</h4>
+                   <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="btn btn-primary" type="submit" value="Отправить"/>
                 </form>
             </div>
 
