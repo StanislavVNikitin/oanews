@@ -19,7 +19,7 @@ class Page(models.Model):
         self.save()
 
     def get_absolute_url(self):
-        return reverse("page", kwargs={"slug": self.slug})
+        return reverse("siteapp:page", kwargs={"slug": self.slug})
 
     class Meta:
         verbose_name = "Страница"
