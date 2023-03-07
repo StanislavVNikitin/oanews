@@ -16,26 +16,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'blog:home' %}">Блог</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'siteapp:page_slug' slug='important_info' %}" id="navbarDropdown1" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">Коротко о важном</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <li><a class="dropdown-item" href="{% url 'siteapp:page_slug' slug='important_info' %}">Диета</a></li>
-                        <li><a class="dropdown-item" href="{% url 'siteapp:page_slug' slug='important_info' %}">Пропионовая Ацидемия</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">Заболевания</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">МетилМалоновая Ацидемия</a></li>
-                        <li><a class="dropdown-item" href="#">Пропионовая Ацидемия</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item disabled" href="#">Другие органические ацидемии</a></li>
-                    </ul>
-                </li>
+                    {% load mptt_tags %}
+                        {% recursetree menuhome %}
+                            {% if node.divider %}
+                                <li><hr class="dropdown-divider"></li>
+                            {% else %}
+                                <li {% if not node.is_leaf_node %} class="nav-item dropdown" {% endif %}>
+                                    <a class="{% if not node.is_leaf_node %} nav-link dropdown-toggle {% else %} dropdown-item {% endif %} {% if node.disabled %} disabled {%endif%}" href="{{ node.get_absolute_url }}" {% if not node.is_leaf_node %} id="navbarDropdown1" role="button"
+                                       data-bs-toggle="dropdown" aria-expanded="false" {% endif %}>{{ node.name }}</a>
+                                        {% if not node.is_leaf_node %}
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                                <li>{{ children }}</li>
+                                            </ul>
+                                        {% endif %}
+                                </li>
+                            {% endif %}
+                        {% endrecursetree %}
+
+
                 <li class="nav-item">
                     <a class="nav-link disabled">ДиетКалькулятор</a>
                 </li>
@@ -46,3 +44,8 @@
         </div>
     </div>
 </nav>
+
+
+
+
+        </ul>

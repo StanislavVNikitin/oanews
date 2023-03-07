@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, TemplateView
 from django.core.mail import send_mail
 from .forms import ContactForm
-from .models import Page
+from .models import Page, MenuHome
 from django.contrib import messages
 from django.conf import settings
 
@@ -15,6 +15,7 @@ class Home(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page'] = get_object_or_404(Page, slug='home')
+        context['menuhome'] = MenuHome.objects.all()
         return context
 
 
@@ -26,6 +27,7 @@ class PageView(TemplateView):
         context = super().get_context_data(**kwargs)
         print(slug)
         context['page'] = get_object_or_404(Page, slug=slug)
+        context['menuhome'] = MenuHome.objects.all()
         return context
 
 
@@ -36,6 +38,7 @@ class ContactPage(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page'] = get_object_or_404(Page, slug='contacts')
+        context['menuhome'] = MenuHome.objects.all()
         return context
 
 def contact_sendmail(request):
@@ -55,4 +58,4 @@ def contact_sendmail(request):
             messages.error(request, 'Ошибка валидации')
     else:
         form = ContactForm()
-    return render(request, 'siteapp/contacts.html', {"form": form, "page": page})
+    return render(request, 'siteapp/contacts.html', {"form": form, "page": page, "menuhome": MenuHome.objects.all()})

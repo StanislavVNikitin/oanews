@@ -4,6 +4,8 @@ from django.views.generic import ListView, DetailView
 from .models import Category, Post, Tag
 from django.db.models import F
 
+from siteapp.models import MenuHome
+
 
 class Home(ListView):
     model = Post
@@ -16,6 +18,7 @@ class Home(ListView):
         context["title"] = "Блог"
         context["categories"] = Category.objects.all()
         context["tags"] = Tag.objects.all()
+        context['menuhome'] = MenuHome.objects.all()
         return context
 
 class PostByCategory(ListView):
@@ -32,6 +35,7 @@ class PostByCategory(ListView):
         context["title"] = Category.objects.get(slug=self.kwargs['slug'])
         context["categories"] = Category.objects.all()
         context["tags"] = Tag.objects.all()
+        context['menuhome'] = MenuHome.objects.all()
         return context
 
 class PostByTag(ListView):
@@ -48,6 +52,7 @@ class PostByTag(ListView):
         context["title"] = Tag.objects.get(slug=self.kwargs['slug'])
         context["categories"] = Category.objects.all()
         context["tags"] = Tag.objects.all()
+        context['menuhome'] = MenuHome.objects.all()
         return context
 
 class GetPost(DetailView):
@@ -58,6 +63,7 @@ class GetPost(DetailView):
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
         context["tags"] = Tag.objects.all()
+        context['menuhome'] = MenuHome.objects.all()
         self.object.views = F('views')  + 1
         self.object.save()
         self.object.refresh_from_db()
@@ -72,6 +78,7 @@ class Search(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['menuhome'] = MenuHome.objects.all()
         context['search'] = self.request.GET.get('s')
         context['s'] = f"s={self.request.GET.get('s')}&"
         return context

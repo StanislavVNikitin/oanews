@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mptt',
     'captcha',
     'ckeditor',
     'ckeditor_uploader',
@@ -225,3 +226,5 @@ CKEDITOR_CONFIGS = {
 CAPTCHA_LETTER_ROTATION = None
 CAPTCHA_NOISE_FUNCTIONS = None
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+
+MPTT_ADMIN_LEVEL_INDENT = 20
