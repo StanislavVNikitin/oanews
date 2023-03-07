@@ -33,6 +33,7 @@ admin.site.register(
     list_display=(
         'tree_actions',
         'indented_title',
+        'disabled',
     ),
     list_display_links=(
         'indented_title',
