@@ -5,25 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>{% block title %} Органические ацидемии {% endblock %}</title>
-    <link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>{% block title %}Органические ацидемии{% endblock %}</title>
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-    <style>
-        .pagination .page-item.active .page-link {
-            background-color: rgb(108,117,125);
-             border-color: rgb(108,117,125);
-        }
-
-        div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
-            background-color: rgb(108,117,125);
-            border-color: rgb(108,117,125);
-        }
-
-        .pagination .page-item.active .page-link:hover {
-            background-color: rgb(108,117,125);
-            border-color: rgb(108,117,125);
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 </head>
 <body>
 
@@ -39,7 +24,7 @@
 
 </div>
 
-<script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 
 
 </body>
