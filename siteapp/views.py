@@ -25,7 +25,6 @@ class PageView(TemplateView):
 
     def get_context_data(self, slug, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(slug)
         context['page'] = get_object_or_404(Page, slug=slug)
         context['menuhome'] = MenuHome.objects.all()
         return context
