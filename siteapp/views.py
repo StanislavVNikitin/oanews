@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 from django.core.mail import send_mail
 from .forms import ContactForm
 from .models import Page, MenuHome
@@ -11,24 +11,26 @@ from django.conf import settings
 class Home(ListView):
     model = Page
     template_name = "siteapp/index.html"
+    context_object_name = "page"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page'] = get_object_or_404(Page, slug='home')
         context['menuhome'] = MenuHome.objects.all()
         return context
 
+    def get_queryset(self):
+        return get_object_or_404(Page, slug='home')
 
-class PageView(TemplateView):
+
+class PageView(DetailView):
     model = Page
     template_name = "siteapp/page.html"
+    context_object_name = "page"
 
-    def get_context_data(self, slug, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page'] = get_object_or_404(Page, slug=slug)
         context['menuhome'] = MenuHome.objects.all()
         return context
-
 
 class ContactPage(ListView):
     model = Page
