@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ title }} :: {{ block.super}} {% endblock %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="section">
+    <div class="container mt-3">
+
+        {% if userstores.count > 0 %}
+
+        <div class="row g-5">
+            <div class="col-md-12">
+                <h3 class="pb-4 mb-4 fst-italic border-bottom">
+                    {{ title }} :: Органические ацидемии
+                </h3>
+
+                {% for userstore in userstores %}
+                <article class="blog-post py-2">
+                    <h3 class="blog-post-title mb-1"><a  class="link link-dark text-decoration-none"href="{{ userstore.get_absolute_url }}">{{ userstore.title }}</a></h3>
+                    <p class="blog-post-meta">{{ userstore.created_at|date:"j E Y" }}</p>
+                    <p class="blog-post-meta">Автор: {{ userstore.user.get_full_name }}</p>
+                    {{ userstore.content|truncatewords_html:100|safe}}
+                    <a href="{{ userstore.get_absolute_url }}" class="link link-secondary ">Читать...</a>
+                </article>
+                {% endfor %}
+
+
+                {% include 'inc/_pagination.html' %}
+
+            </div>
+
+        </div>
+        {% else %}
+            <p>Пока не одна из пользовательский историй не опубликована.</p>
+        {% endif %}
+
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

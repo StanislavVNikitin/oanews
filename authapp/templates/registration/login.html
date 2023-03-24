@@ -1,0 +1,83 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }} :: Органические ацидемии</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Favicons -->
+    <meta name="theme-color" content="#7952b3">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+    </style>
+    <link rel="stylesheet" href="{% static 'assets/css/signin.css' %}">
+
+</head>
+<body class="text-center">
+
+<main class="form-signin">
+
+
+    {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Не корректный Логин и Пароль.
+                Проверте ваши учетные данные.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    {% endif %}
+
+    {% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+    {% endif %}
+
+    <main class="form-signin">
+        {% if user.is_authenticated %}
+
+            <p class="px-2">Здравствуйте {% if user.get_full_name %} {{ user.get_full_name }} {% else %} {{ user }} {% endif %}, вы уже авторизованы.</p>
+            <div class="px-2"><a class="btn btn-lg btn-secondary"  href="{% url 'siteapp:home' %}">Главная страница</a></div>
+            <div class="px-2"><a href="{% url 'authapp:logout' %}">Выйти</a></div>
+
+        {% else %}
+
+        <form method="post" action="{% url 'authapp:login' %}">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-normal">Авторизация</h1>
+
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Логин" name="username">
+                <label for="floatingInput">Логин</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Пароль" name="password">
+                <label for="floatingPassword">Пароль</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-secondary" type="submit">Войти</button>
+
+        </form>
+
+        {% endif %}
+    </main>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'siteapp.apps.SiteappConfig',
     'blog.apps.BlogConfig',
+    'authapp.apps.AuthappConfig',
 ]
 
 MIDDLEWARE = [
@@ -112,6 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "authapp.CustomUser"
+LOGIN_REDIRECT_URL = "siteapp:home"
+LOGOUT_REDIRECT_URL = "siteapp:home"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -226,3 +230,5 @@ CKEDITOR_CONFIGS = {
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 
 MPTT_ADMIN_LEVEL_INDENT = 20
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

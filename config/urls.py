@@ -20,9 +20,11 @@ from django.urls import path, include
 
 urlpatterns = [
     path('akabinet/', admin.site.urls),
+    path('accounts/', include('authapp.urls', namespace='accounts')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('captcha/',include('captcha.urls')),
     path('blog/', include("blog.urls")),
+    path('auth/', include("authapp.urls", namespace='auth')),
     path('', include("siteapp.urls")),
 ]
 

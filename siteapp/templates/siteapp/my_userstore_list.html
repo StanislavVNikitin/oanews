@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ title }} :: {{ block.super}} {% endblock %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="section">
+    <div class="container mt-3">
+
+        <a class="btn btn-success" href="{% url 'siteapp:create_my_userstore' %}">Написать новую историю</a></td>
+
+        {% if userstores.count > 0 %}
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Название</th>
+                  <th scope="col">Опубликовано</th>
+                  <th scope="col">Промодерировано</th>
+                  <th scope="col">Удалить</th>
+                  <th scope="col">Изменить</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {% for userstore in userstores %}
+
+                <tr>
+                  <td class="col-8"><a class="text-decoration-none" href="{{ userstore.get_absolute_url }}">{{userstore.title}}</a></td>
+                  <td class="col-1"><p><a class="text-decoration-none" href="{% url 'siteapp:change_published_my_userstore' pk=userstore.id %}">{% if userstore.is_published %}<span class="btn btn-outline-success">Да</span> {% else %} <span class="btn btn-outline-danger">Нет</span> </a> {% endif %}</p></td>
+                  <td class="col-1"><p>{% if userstore.is_moderated %}<span class="btn btn-outline-success disabled">Да</span> {% else %} <span class="btn btn-outline-danger disabled">Нет</span>  {% endif %}</p></td>
+                  <td class="col-1"><a class="btn btn-danger" href="{% url 'siteapp:delete_my_userstore' pk=userstore.id %}">Удалить</a></td>
+                  <td class="col-1"><a class="btn btn-success" href="{% url 'siteapp:update_my_userstore' pk=userstore.id %}">Изменить</a></td>
+                </tr>
+
+                {% endfor %}
+
+              </tbody>
+            </table>
+
+                {% include 'inc/_pagination.html' %}
+
+        {% else %}
+            <p>Пока не одна из пользовательский историй не опубликована.</p>
+        {% endif %}
+
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

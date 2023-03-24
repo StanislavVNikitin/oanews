@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ title }} :: {{ block.super}} {% endblock %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="section">
+    <div class="container mt-3">
+    {% if user == userstore.user %}
+     <h2>Удаление истории</h2>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+          <p>Вы уверены что хотите удалить пользовательскую историю?</p>
+          <button class="btn btn-danger" type="submit">Удалить историю</button>
+        </form>
+    {% else %}
+      <h3 class="text-danger"> Ошибка доступа.</h3>
+      <p>Вы не можете удалять не свою историю.</p>
+    {% endif%}
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

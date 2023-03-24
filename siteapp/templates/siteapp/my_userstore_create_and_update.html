@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+
+
+  <div class="section">
+
+    <div class="container py-4">
+
+      {% if not userstore.user or user == userstore.user %}
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.media }}
+          <input type="submit" value="Сохранить">
+      </form>
+      {% else %}
+      <h3 class="text-danger"> Ошибка доступа.</h3>
+      <p>Вы не можете править не свою историю.</p>
+      {% endif%}
+    </div>
+
+  </div>
+{% endblock %}

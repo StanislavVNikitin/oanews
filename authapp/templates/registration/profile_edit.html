@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center my-2">
+    <div class="col-lg-6">
+        <h3>Редактирование профиля</h3>
+        <div class="row justify-content-center">
+            <div class="col-sm-7 col-md-5 col-lg-4">
+                {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="" width="100%">
+                {% else %}
+                <img src="{{ MEDIA_URL }}avatar_default.svg" alt="" width="100%">
+                {% endif %}
+            </div>
+        </div>
+        <form method="post" class="mt-2 py-5" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="div_id_username" class="form-group"><label for="id_username"
+                                                                class=" requiredField">
+                Username<span class="asteriskField">*</span> </label>
+                <div class=""><input type="text" name="username" maxlength="150"
+                                     class="textinput textInput form-control" required id="id_username"
+                                     value="{{ user.username }}"> <small id="hint_id_username"
+                                                                         class="form-text text-muted">Required. 150
+                    characters or fewer.
+                    Letters, digits and @/./+/-/_ only.</small></div>
+            </div>
+            <div id="div_id_first_name" class="form-group"><label for="id_first_name"
+                                                                  class="">
+                Имя
+            </label>
+                <div class=""><input type="text" name="first_name" maxlength="150"
+                                     class="textinput textInput form-control" id="id_first_name"
+                                     value="{{ user.first_name }}"></div>
+            </div>
+            <div id="div_id_last_name" class="form-group"><label for="id_last_name"
+                                                                 class="">
+                Фамилия
+            </label>
+                <div class=""><input type="text" name="last_name" maxlength="150"
+                                     class="textinput textInput form-control" id="id_last_name"
+                                     value="{{ user.last_name }}"></div>
+            </div>
+
+            <div id="div_id_gender" class="form-group"><label for="id_gender" class="">
+                Пол
+            </label>
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="gender">
+                            {% for item in gender %}
+                                <option {% if user.gender == item.0 %} selected {% endif %} value="{{item.0}}">{{ item.1 }}</option>
+                            {% endfor %}
+                         </select></div>
+
+            </div>
+
+            <div id="div_id_birthday" class="form-group"><label for="id_birthday" class="">
+                День рождение
+            </label>
+                <div class=""><input type="date" name="birthday"
+                                     class="numberinput form-control" id="id_birthday" value="{{user.birthday|date:'Y-m-d'}}">
+                </div>
+            </div>
+            <div id="div_id_weight" class="form-group"><label for="id_weight" class="">
+                Вес в кг.
+            </label>
+                <div class=""><input type="number" name="weight" min="0"
+                                     class="numberinput form-control" id="id_weight" value="{{ user.weight }}">
+                </div>
+            </div>
+            <div id="div_id_height" class="form-group"><label for="id_height" class="">
+                Рост в см.
+            </label>
+                <div class=""><input type="number" name="height" min="0"
+                                     class="numberinput form-control" id="id_height" value="{{ user.height }}">
+                </div>
+            </div>
+            <div id="div_id_avatar" class="form-group"><label for="id_avatar"
+                                                              class="">
+                Avatar
+            </label>
+                <div class=""><input type="file" name="avatar" accept="image/*"
+                                     class="clearablefileinput form-control-file" id="id_avatar"></div>
+            </div>
+            <div id="div_id_email" class="form-group"><label for="id_email"
+                                                             class=" requiredField">
+                Email address<span class="asteriskField">*</span> </label>
+                <div class=""><input type="text" name="email" maxlength="256"
+                                     class="textinput textInput form-control" required="" id="id_email"
+                                     value="{{ user.email }}">
+                </div>
+            </div>
+            <button type=" submit"
+                    class="btn btn-primary btn-block">Сохранить
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

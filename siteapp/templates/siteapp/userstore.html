@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ userstore.title }} {% endblock %}
+
+
+{% block content %}
+
+
+  <div class="section">
+
+    <div class="container py-4">
+
+      <h3 class="blog-post-title mb-1"><a  class="link link-dark text-decoration-none"href="{{ userstore.get_absolute_url }}">{{ userstore.title }}</a></h3>
+      <p class="blog-post-meta">{{ userstore.created_at|date:"j E Y" }}</p>
+      <p class="blog-post-meta">Автор: {{ userstore.user.get_full_name }}</p>
+      <p class="blog-post-meta">Опубликовано: {% if userstore.is_published %} <span class="text-success">Да</span> {% else %} <span class="text-danger">Нет</span> {% endif %}</p>
+      <p class="blog-post-meta">Прошло модерацию: {% if userstore.is_moderated %}<span class="text-success">Да</span> {% else %} <span class="text-danger">Нет</span>  {% endif %}</p>
+
+      {{ userstore.content|safe }}
+
+      {% if user == userstore.user %}
+          <div class="col-3 py-2">
+              <a class="btn btn-danger" href="{% url 'siteapp:delete_my_userstore' pk=userstore.id %}">Удалить</a>
+              <a class="btn btn-success" href="{% url 'siteapp:update_my_userstore' pk=userstore.id %}">Изменить</a>
+          </div>
+          <div class="col-3 py-2">
+            <a class="btn btn-secondary" href="{% url 'siteapp:my_user_stores_list' %}">Посмотреть все мои истории</a>
+          </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+{% endblock %}
