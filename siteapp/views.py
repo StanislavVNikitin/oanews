@@ -89,7 +89,7 @@ class UserStoreList(LoginRequiredMixin, ListView):
     model = UserStore
     template_name = "siteapp/userstore_list.html"
     context_object_name = "userstores"
-    paginate_by = 4
+    paginate_by = 6
 
 
     def get_queryset(self):
@@ -98,6 +98,7 @@ class UserStoreList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menuhome'] = MenuHome.objects.all()
+        context['title'] = "Истории семей"
         return context
 
 class CreateMyUserStore(LoginRequiredMixin, CreateView):
@@ -164,7 +165,7 @@ class UpdateMyUserStore(LoginRequiredMixin, UpdateView):
             self.object = form.save(commit=False)
             self.object.user = self.request.user
             self.object.slug = slugify(self.object.title)
-            if not self.object.title == myuserstoreindb.title or not self.object.content == myuserstoreindb.content:
+            if not self.object.title == myuserstoreindb.title or not self.object.content == myuserstoreindb.content or not self.object.photo == myuserstoreindb.photo:
                 self.object.is_moderated = False
             self.object = self.object.save()
             subject_mail = f'Сайт OAnews.ru сообщение: Измененная история на модерацию { myuserstoreindb.title}'

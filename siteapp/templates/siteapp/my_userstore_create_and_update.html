@@ -9,14 +9,19 @@
 
   <div class="section">
 
-    <div class="container py-4">
+    <div class="container py-5 mb-5">
 
       {% if not userstore.user or user == userstore.user %}
-      <form method="post">
+      <form method="post" class="mt-2" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         {{ form.media }}
-          <input type="submit" value="Сохранить">
+        {% if userstore.photo %}
+           <div class="pb-2"><img src="{{ userstore.photo.url }}" alt="Photo" width="auto" height="225" style="object-fit: contain;"></div>
+        {% else %}
+           <p>Картринки нет</p>
+        {% endif %}
+          <input type="submit" class="btn btn-success"value="Сохранить">
       </form>
       {% else %}
       <h3 class="text-danger"> Ошибка доступа.</h3>

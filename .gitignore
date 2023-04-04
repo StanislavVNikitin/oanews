@@ -250,3 +250,6 @@ fabric.properties
 
 /media
 /media/*
+/blog/migrations/0001_initial.py
+/siteapp/migrations/0001_initial.py
+/siteapp/migrations/0002_userstore_photo.py

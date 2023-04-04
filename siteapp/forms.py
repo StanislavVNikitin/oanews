@@ -13,13 +13,14 @@ class ContactForm(forms.Form):
     captcha = CaptchaField()
 
 class MyUserStoreForm(forms.ModelForm):
+    photo = forms.ImageField(label="Картинка")
     title = forms.CharField(label="Название", widget=forms.TextInput(attrs={'class': 'form-control'}))
     content = forms.CharField(widget=CKEditorUploadingWidget, label="Пользовательская история")
     is_published = forms.BooleanField(label='Опубликовать', required = False)
 
     class Meta:
         model = UserStore
-        fields = ['title', 'content', 'is_published']
+        fields = ['title', 'content', 'is_published', 'photo']
         widgets = {
             "content": forms.CharField(widget=CKEditorUploadingWidget()),
             'is_published': forms.CheckboxInput(attrs={'class': 'form-check-input form-control', 'role' : 'switch'}),

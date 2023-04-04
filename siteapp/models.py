@@ -56,6 +56,7 @@ class UserStore(models.Model):
     title = models.CharField(max_length=255, verbose_name="Название страницы")
     slug = models.SlugField(max_length=255, verbose_name="Url страницы", unique=True)
     content = models.TextField(blank=True, verbose_name="Текст страницы")
+    photo = models.ImageField(upload_to="photo/%Y/%m/%d/", blank=True, verbose_name="Картинка")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
     views = models.IntegerField(default=0, verbose_name="Количество просмотров")

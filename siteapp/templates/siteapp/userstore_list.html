@@ -19,16 +19,31 @@
                     {{ title }} :: Органические ацидемии
                 </h3>
 
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pb-5 mb-5">
+
+
                 {% for userstore in userstores %}
-                <article class="blog-post py-2">
-                    <h3 class="blog-post-title mb-1"><a  class="link link-dark text-decoration-none"href="{{ userstore.get_absolute_url }}">{{ userstore.title }}</a></h3>
-                    <p class="blog-post-meta">{{ userstore.created_at|date:"j E Y" }}</p>
-                    <p class="blog-post-meta">Автор: {{ userstore.user.get_full_name }}</p>
-                    {{ userstore.content|truncatewords_html:100|safe}}
-                    <a href="{{ userstore.get_absolute_url }}" class="link link-secondary ">Читать...</a>
-                </article>
+                <div class="col">
+                  <div class="card shadow-sm">
+                      {% if userstore.photo %}
+                        <img src="{{ userstore.photo.url }}" alt="Photo" width="auto" height="225" style="object-fit: contain;">
+                      {% else %}
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#55595c"></rect></svg>
+                      {% endif %}
+                    <div class="card-body">
+                      <p class="card-text"> {{userstore.title}}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <a href="{{ userstore.get_absolute_url }}" class="btn btn-sm btn-outline-secondary ">Читать...</a>
+                        </div>
+                        <small class="text-body-secondary">{{ userstore.created_at|date:"j E Y" }}</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 {% endfor %}
 
+                </div>
 
                 {% include 'inc/_pagination.html' %}
 
