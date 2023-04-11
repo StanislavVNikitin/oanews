@@ -37,6 +37,7 @@ class PageView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menuhome'] = MenuHome.objects.all()
+        context['description'] = "Cтраница "
         self.object.views = F('views')  + 1
         self.object.save()
         self.object.refresh_from_db()

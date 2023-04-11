@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block description %} {{ description }} {{ block.super}}  {% endblock %}
+{% block description %} {{ description }} {{ page.title }} {{ block.super}}  {% endblock %}
 {% block title %} {{ page.title }} {% endblock %}
 
 
