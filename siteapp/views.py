@@ -50,6 +50,7 @@ class ContactPage(ListView):
         context = super().get_context_data(**kwargs)
         context['page'] = get_object_or_404(Page, slug='contacts')
         context['menuhome'] = MenuHome.objects.all()
+        context['description'] = "Cтраница с информацией для связи."
         return context
 
 def contact_sendmail(request):
