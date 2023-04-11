@@ -71,7 +71,7 @@ def contact_sendmail(request):
             messages.error(request, 'Ошибка валидации')
     else:
         form = ContactForm()
-    return render(request, 'siteapp/contacts.html', {"form": form, "page": page, "menuhome": MenuHome.objects.all()})
+    return render(request, 'siteapp/contacts.html', {"form": form, "page": page, "menuhome": MenuHome.objects.all(),"description": "Cтраница с информацией для связи." })
 
 class UserStoreDetail(LoginRequiredMixin, DetailView):
     model = UserStore
