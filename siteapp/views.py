@@ -21,6 +21,7 @@ class Home(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menuhome'] = MenuHome.objects.all()
+        context['title'] = "Органические ацидемии"
         return context
 
     def get_queryset(self):
