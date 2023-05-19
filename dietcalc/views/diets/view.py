@@ -75,7 +75,7 @@ class PublicDietView(DetailView):
             user_diet = UserDiet.objects.get(slug=self.kwargs['slug'], is_published=True)
         except UserDiet.DoesNotExist:
             raise Http404()
-        context['title'] = "Диета: " + user_diet.name
+        context['title'] = "Диета:" + user_diet.name
         context_diets = Diet.objects.filter(user_diet_id=user_diet.id).annotate(
             f_protein=F('food__protein') * F('count') / 100, f_fat=F('food__fat') * F('count') / 100,
             f_carbohydrates=F('food__carbohydrates') * F('count') / 100,
