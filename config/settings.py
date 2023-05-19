@@ -46,9 +46,12 @@ INSTALLED_APPS = [
     'captcha',
     'ckeditor',
     'ckeditor_uploader',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'siteapp.apps.SiteappConfig',
     'blog.apps.BlogConfig',
     'authapp.apps.AuthappConfig',
+    'dietcalc.apps.DietcalcConfig',
 ]
 
 MIDDLEWARE = [
@@ -232,3 +235,7 @@ CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 MPTT_ADMIN_LEVEL_INDENT = 20
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'

@@ -24,6 +24,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('captcha/',include('captcha.urls')),
     path('blog/', include("blog.urls")),
+    path('diet/', include("dietcalc.urls")),
     path('auth/', include("authapp.urls", namespace='auth')),
     path('', include("siteapp.urls")),
 ]

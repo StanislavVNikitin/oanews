@@ -55,6 +55,8 @@
                         <li><p class="dropdown-item"><b>{% if user.get_full_name %} {{ user.get_full_name }} {% else %} {{ user }} {% endif %}</b></p></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url 'siteapp:my_user_stores_list' %}">Мои истории</a></li>
+                        <li><a class="dropdown-item" href="{% url 'dietcalc:mydiets' %}">Мои диеты</a></li>
+                        <li><a class="dropdown-item" href="{% url 'dietcalc:myfoods' %}">Мои продукты</a></li>
                         <li><a class="dropdown-item" href="{% url 'authapp:profile_edit' %}">Профиль</a></li>
                         <li><a class="dropdown-item" href="{% url 'authapp:password_change' pk=user.pk %}">Изменить пароль</a></li>
                         <li><hr class="dropdown-divider"></li>

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block description %}{{ title }}{% endblock %}
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+
+
+  <div class="section">
+
+
+    <form method="post">
+      {% csrf_token %}
+      <p class="pt-3">Удалить продукт <strong>"{{ object }}"</strong> ?</p>
+      <a href="{% url 'dietcalc:myfoods' %}" class="btn btn-sm btn-secondary">Вернутся к мои продуктамм</a>
+      <input type="submit" class="btn btn-sm btn-danger" value="Удалить">
+    </form>
+
+  </div>
+{% endblock %}

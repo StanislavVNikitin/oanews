@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block description %}{{ title }}{% endblock %}
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+
+
+  <div class="section">
+
+    <div class="container py-4">
+
+        <a href="{% url 'dietcalc:mydiets' %}" class="btn btn-sm btn-outline-secondary">Вернутся к диетам</a>
+        <a href="{% url 'dietcalc:create_my_food' %}" type="button" class="btn btn-sm btn-outline-primary">Добавить новый продукт</a>
+        <h3>{{ userdiet.name }}</h3>
+        <p>Пол: {% if userdiet.gender == 'F' %} Женский {% else %} Мужской {% endif %}</p>
+        <p>Возраст: {{ userdiet.age }}</p>
+        <p>Вес: {{ userdiet.weight }} кг</p>
+        <p>Рост: {{ userdiet.height }} см</p>
+        <p>Заболевание:  <b>{{ userdiet.disease.name }}</b></p>
+        <p>Диета опубликована: <a class="text-decoration-none" href="{% url 'dietcalc:change_published_my_diet' pk=userdiet.id %}">{% if userdiet.is_published %}<span class="btn btn-sm btn-outline-success">Да</span> {% else %} <span class="btn btn-sm btn-outline-danger">Нет</span> </a>{% endif %}<p>
+        <p>{% if userdiet.is_published %} <a class="text-decoration-none" href="https://oanews.ru{% url 'dietcalc:public_diet_view' slug=userdiet.slug %}">https://oanews.ru{% url 'dietcalc:public_diet_view' slug=userdiet.slug %}</a>{% endif %}</p>
+        <form method="post" action="{% url 'dietcalc:add_food_to_diet' %}">
+            {% csrf_token %}
+          <div class="row">
+            <div class="form-group col-md-5">
+              <select class="form-control custom-select" name="food_id">
+                  {% for item in foods %}
+                    <option value="{{ item.pk }}">{% if item.special_food %} *** {% endif %} {{ item.name }}</option>
+                  {% endfor %}
+              </select>
+            </div>
+            <div class="form-group col-md-5">
+                <input type="number" min="0" max="1000" step="0" class="form-control" placeholder="Количество в граммах" name="food_count">
+            </div>
+            <div class="form-group col-md-2">
+                <button type="submit" class="btn btn-success">Добавить</button>
+            </div>
+          </div>
+            <input type="hidden" name="userdiet" value="{{userdiet.pk}}">
+        </form>
+
+        {% if diets.count > 0 %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="col-6">Продукт</th>
+              <th class="col-1">Количество</th>
+              <th class="col-1">Белок</th>
+              <th class="col-1">Жиры</th>
+              <th class="col-1">Угливоды</th>
+              <th class="col-1">Калорийность</th>
+              <th class="col-1">#</th>
+            </tr>
+          </thead>
+          <tbody>
+
+        {% for item in diets %}
+              <tr>
+                  <form method="post" action="{% url 'dietcalc:change_food_in_diet'  pk=item.id %}">
+                    {% csrf_token %}
+                <th scope="row">{{ item.food }}</th>
+                <td><input class="form-control form-control-sm" type="number" name="count" value="{{ item.count }}"></td>
+                <td>{{ item.f_protein|floatformat:1  }}</td>
+                <td>{{ item.f_fat|floatformat:1 }}</td>
+                <td>{{ item.f_carbohydrates|floatformat:1 }}</td>
+                <td>{{ item.f_calories|floatformat:0 }}</td>
+                <td>
+                  <span><button type="submit" class="btn btn-outline-success btn-sm">U</button></span>
+                  <span><a href="{% url 'dietcalc:delete_food_to_diet' pk=item.id %}" type="button" class="btn btn-outline-danger btn-sm">X</a></span>
+                </td>
+                </form>
+              </tr>
+        {% endfor %}
+            <tr>
+            <td colspan="7"></td>
+            </tr>
+            <tr>
+                <th scope="row">Суммарно в день</th>
+                <td></td>
+                <th>{{ diets_aggregate.sum_protein|floatformat:1  }}</th>
+                <th>{{ diets_aggregate.sum_fat|floatformat:1 }}</th>
+                <th>{{ diets_aggregate.sum_carbohydrates|floatformat:1 }}</th>
+                <th>{{ diets_aggregate.sum_calories|floatformat:0 }}</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Суммарно в день\Кг</th>
+                <td></td>
+                <td>{{ diets_aggregate.sum_protein_weight|floatformat:1  }}</td>
+                <td>{{ diets_aggregate.sum_fat_weight|floatformat:1 }}</td>
+                <td>{{ diets_aggregate.sum_carbohydrates_weight|floatformat:1 }}</td>
+                <td>{{ diets_aggregate.sum_calories_weight|floatformat:0 }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Энергия в %</th>
+                <td></td>
+                <td><small>{{ diets_aggregate.procent_protein|floatformat:0}}%</small></td>
+                <td><small>{{ diets_aggregate.procent_fat|floatformat:0 }}%</small></td>
+                <td><small>{{ diets_aggregate.procent_carbohydrates|floatformat:0 }}%</small></td>
+                <td colspan="2"></td>
+            </tr>
+          </tbody>
+        </table>
+        {% else %}
+            <p>Не добавлено не одного продукта в диету, добавти продукты для расчета</p>
+        {% endif %}
+
+    </div>
+
+  </div>
+{% endblock %}

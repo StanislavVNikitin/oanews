@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block description %}{{ title }}{% endblock %}
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+
+
+  <div class="section">
+
+    <div class="container py-4">
+
+        <a href="{% url 'dietcalc:myfoods' %}" class="btn btn-outline-secondary my-3">Вернутся к продуктам</a>
+
+        <h6>{{ userfood.name }}</h6>
+        <p>Белки: {{ userfood.protein }}</p>
+        <p>Жиры: {{ userfood.fat }}</p>
+        <p>Угливоды: {{ userfood.carbohydrates }}</p>
+        <p>Калорийность: {{ userfood.calories }} Ккал</p>
+
+        <a href="{% url 'dietcalc:create_my_food' %}" type="button" class="btn btn-success mb-3">Добавить новый продукт</a>
+
+    </div>
+
+  </div>
+{% endblock %}

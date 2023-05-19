@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block description %}{{ title }}{% endblock %}
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+
+
+<div class="section">
+
+    <div class="container py-4">
+        {% if userfoods.count > 0 %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Название продукта</th>
+                <th scope="col">Изменить</th>
+                <th scope="col">Удалить</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for userfood in userfoods %}
+            <tr>
+                <td class="col-10"><a href="{% url 'dietcalc:food_view' pk=userfood.id %}" class="text-dark text-decoration-none">{{ userfood.name }}</a></td>
+                <td class="col-1"><a href="{% url 'dietcalc:update_my_food' pk=userfood.id %}" type="button" class="btn btn-sm btn-success">Изменить</a></td>
+                <td class="col-1"><a href="{% url 'dietcalc:delete_my_food' pk=userfood.id %}" type="button" class="btn btn-sm btn-danger">Удалить</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>Пока нет добавленных вами продуктов.</p>
+        {% endif %}
+
+        <a href="{% url 'dietcalc:create_my_food' %}" type="button" class="btn btn-success mb-3">Добавить продукт</a>
+    </div>
+
+</div>
+{% endblock %}

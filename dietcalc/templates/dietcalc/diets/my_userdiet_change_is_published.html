@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+
+
+  <div class="section">
+
+    <div class="container py-4">
+    {% if user == userdiet.user %}
+      <form method="post">
+        {% csrf_token %}
+        <p>{% if userdietpublished %} <span class="text-success">Вы опубликовываете свою диету.</span> {% else %} <span class="text-danger">Вы снимаете с публикации свою диету.</span> {% endif %}</p>
+        <input type="hidden" name="is_published" value="{{ userdietpublished }}">
+        <input type="submit" {% if userdietpublished %} class="btn btn-success" value="Опубликовать" {% else %} class="btn btn-danger" value="Снять с публикации" {% endif %}>
+      </form>
+    {% else %}
+      <h3 class="text-danger"> Ошибка доступа.</h3>
+      <p>Вы не можете править не свою историю.</p>
+    {% endif%}
+    </div>
+
+  </div>
+{% endblock %}
