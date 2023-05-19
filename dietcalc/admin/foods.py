@@ -11,6 +11,7 @@ class FoodAdmin(admin.ModelAdmin, DeleteUndeleteMixin):
     save_on_top = True
     list_display = ("id", "name", "category_food", "special_food", "user", "created_at", "get_photo", "deleted")
     list_display_links = ("id", "name")
+    ordering = ["-special_food", "name"]
     search_fields = ("name",)
     list_filter = ("category_food",)
     readonly_fields = ("created_at", "get_photo")
