@@ -120,6 +120,10 @@ AUTH_USER_MODEL = "authapp.CustomUser"
 LOGIN_REDIRECT_URL = "siteapp:home"
 LOGOUT_REDIRECT_URL = "siteapp:home"
 
+AUTHENTICATION_BACKENDS = (
+    "authapp.backends.EmailandUserBackend",
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
