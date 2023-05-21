@@ -21,7 +21,7 @@
         <p>Рост: {{ userdiet.height }} см</p>
         <p>Заболевание:  <b>{{ userdiet.disease.name }}</b></p>
         <p>Диета опубликована: <a class="text-decoration-none" href="{% url 'dietcalc:change_published_my_diet' pk=userdiet.id %}">{% if userdiet.is_published %}<span class="btn btn-sm btn-outline-success">Да</span> {% else %} <span class="btn btn-sm btn-outline-danger">Нет</span> </a>{% endif %}<p>
-        <p>{% if userdiet.is_published %} <a class="text-decoration-none" href="https://www.oanews.ru{% url 'dietcalc:public_diet_view' slug=userdiet.slug %}">https://oanews.ru{% url 'dietcalc:public_diet_view' slug=userdiet.slug %}</a>{% endif %}</p>
+        <p>{% if userdiet.is_published %} <a class="text-decoration-none" href="https://oanews.ru{% url 'dietcalc:public_diet_view' slug=userdiet.slug %}">https://oanews.ru{% url 'dietcalc:public_diet_view' slug=userdiet.slug %}</a>{% endif %}</p>
         <form method="post" action="{% url 'dietcalc:add_food_to_diet' %}">
             {% csrf_token %}
           <div class="row">
