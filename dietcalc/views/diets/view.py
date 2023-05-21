@@ -38,7 +38,7 @@ class UserDietView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['menuhome'] = MenuHome.objects.all()
         context['foods'] = Food.objects.filter(Q(deleted=False) & (Q(is_published=True) | Q(user=self.request.user))).order_by('-special_food','name')
-        context_diets = Diet.objects.filter(user_diet_id=UserDiet.objects.get(slug=self.kwargs['slug']).id).annotate(
+        context_diets = Diet.objects.filter(user_diet__slug=self.kwargs['slug'], food__deleted=False).annotate(
             f_protein=F('food__protein') * F('count') / 100, f_fat=F('food__fat') * F('count') / 100,
             f_carbohydrates=F('food__carbohydrates') * F('count') / 100,
             f_calories=F('food__calories') * F('count') / 100)
@@ -76,7 +76,7 @@ class PublicDietView(DetailView):
         except UserDiet.DoesNotExist:
             raise Http404()
         context['title'] = "Диета: " + user_diet.name
-        context_diets = Diet.objects.filter(user_diet_id=user_diet.id).annotate(
+        context_diets = Diet.objects.filter(user_diet_id=user_diet.id, food__deleted=False).annotate(
             f_protein=F('food__protein') * F('count') / 100, f_fat=F('food__fat') * F('count') / 100,
             f_carbohydrates=F('food__carbohydrates') * F('count') / 100,
             f_calories=F('food__calories') * F('count') / 100)
