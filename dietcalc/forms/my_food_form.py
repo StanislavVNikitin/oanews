@@ -9,4 +9,4 @@ class CreateAndUpdateMyFoodForm(forms.ModelForm):
 
     class Meta:
         model = Food
-        fields = ['name', 'protein', 'carbohydrates', 'fat', 'calories', 'special_food']
+        fields = ['name', 'protein', 'carbohydrates', 'fat', 'calories']

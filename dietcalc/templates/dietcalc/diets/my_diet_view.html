@@ -13,6 +13,7 @@
     <div class="container py-4">
 
         <a href="{% url 'dietcalc:mydiets' %}" class="btn btn-sm btn-outline-secondary">Вернутся к диетам</a>
+        <a href="{% url 'dietcalc:special_food_calc' %}" type="button" class="btn btn-sm btn-outline-success">Рассчитать количество спец.смеси</a>
         <a href="{% url 'dietcalc:create_my_food' %}" type="button" class="btn btn-sm btn-outline-primary">Добавить новый продукт</a>
         <h3>{{ userdiet.name }}</h3>
         <p>Пол: {% if userdiet.gender == 'F' %} Женский {% else %} Мужской {% endif %}</p>

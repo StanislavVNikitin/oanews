@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block description %}{{ title }}{% endblock %}
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+
+
+  <div class="section">
+
+    <div class="container py-4">
+
+      {% if count_special_food %}
+      <h5> Рассчетное количество смеси <i>{{ special_food_name }}</i> в граммах: <b style="color: red">{{ count_special_food|floatformat:0 }} гр</b></h5>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-success" value="Рассчитать">
+      </form>
+
+    </div>
+
+  </div>
+{% endblock %}
