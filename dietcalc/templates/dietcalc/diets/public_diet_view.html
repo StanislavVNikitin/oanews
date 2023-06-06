@@ -13,11 +13,23 @@
     <div class="container pt-3 pb-5">
 
         <h3>{{ userdiet.name }}</h3>
-        <p>Пол: {% if userdiet.gender == 'F' %} Женский {% else %} Мужской {% endif %}</p>
-        <p>Возраст: {{ userdiet.age }} лет</p>
-        <p>Вес: {{ userdiet.weight }} кг</p>
-        <p>Рост: {{ userdiet.height }} см</p>
-        <p>Заболевание:  <b>{{ userdiet.disease.name }}</b></p>
+          <div class="row pb-3">
+              <div class="col-4">
+               Заболевание:  <b>{{ userdiet.disease.name }}</b>
+            </div>
+            <div class="col-2">
+              Пол: {% if userdiet.gender == 'F' %} Женский {% else %} Мужской {% endif %}
+            </div>
+            <div class="col-2">
+              Возраст: {{ userdiet.age }}
+            </div>
+            <div class="col-2">
+              Вес: {{ userdiet.weight }} кг
+            </div>
+            <div class="col-2">
+                Рост: {{ userdiet.height }} см
+            </div>
+          </div>
         {% if diets.count > 0 %}
         <table class="table table-striped pt-2">
           <thead>
@@ -56,17 +68,29 @@
             <tr>
                 <th scope="row">Суммарно в день\Кг</th>
                 <td></td>
-                <td>{{ diets_aggregate.sum_protein_weight|floatformat:1  }}</td>
-                <td>{{ diets_aggregate.sum_fat_weight|floatformat:1 }}</td>
-                <td>{{ diets_aggregate.sum_carbohydrates_weight|floatformat:1 }}</td>
+                <td>{{ diets_aggregate.sum_protein_weight|floatformat:2  }}</td>
+                <td>{{ diets_aggregate.sum_fat_weight|floatformat:2 }}</td>
+                <td>{{ diets_aggregate.sum_carbohydrates_weight|floatformat:2 }}</td>
                 <td>{{ diets_aggregate.sum_calories_weight|floatformat:0 }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Натурального белка г\Кг:</th>
+                <td></td>
+                <td>{{ diets_aggregate.sum_protein_nature_weight|floatformat:2 }}</td>
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <th scope="row">Белок из спец смеси г\Кг:</th>
+                <td></td>
+                <td>{{ diets_aggregate.sum_protein_amino_weight|floatformat:2 }}</td>
+                <td colspan="4"></td>
             </tr>
             <tr>
                 <th scope="row">Энергия в %</th>
                 <td></td>
-                <td><small>{{ diets_aggregate.procent_protein|floatformat:0}}%</small></td>
-                <td><small>{{ diets_aggregate.procent_fat|floatformat:0 }}%</small></td>
-                <td><small>{{ diets_aggregate.procent_carbohydrates|floatformat:0 }}%</small></td>
+                <td><small>{{ diets_aggregate.procent_protein|floatformat:1 }}%</small></td>
+                <td><small>{{ diets_aggregate.procent_fat|floatformat:1 }}%</small></td>
+                <td><small>{{ diets_aggregate.procent_carbohydrates|floatformat:1 }}%</small></td>
                 <td></td>
             </tr>
           </tbody>

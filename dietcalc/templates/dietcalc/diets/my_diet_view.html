@@ -10,17 +10,29 @@
 
   <div class="section">
 
-    <div class="container py-4">
+    <div class="container pt-4 pb-5">
 
         <a href="{% url 'dietcalc:mydiets' %}" class="btn btn-sm btn-outline-secondary">Вернутся к диетам</a>
         <a href="{% url 'dietcalc:special_food_calc' %}" type="button" class="btn btn-sm btn-outline-success">Рассчитать количество спец.смеси</a>
         <a href="{% url 'dietcalc:create_my_food' %}" type="button" class="btn btn-sm btn-outline-primary">Добавить новый продукт</a>
         <h3>{{ userdiet.name }}</h3>
-        <p>Пол: {% if userdiet.gender == 'F' %} Женский {% else %} Мужской {% endif %}</p>
-        <p>Возраст: {{ userdiet.age }}</p>
-        <p>Вес: {{ userdiet.weight }} кг</p>
-        <p>Рост: {{ userdiet.height }} см</p>
-        <p>Заболевание:  <b>{{ userdiet.disease.name }}</b></p>
+          <div class="row pb-3">
+              <div class="col-4">
+               Заболевание:  <b>{{ userdiet.disease.name }}</b>
+            </div>
+            <div class="col-2">
+              Пол: {% if userdiet.gender == 'F' %} Женский {% else %} Мужской {% endif %}
+            </div>
+            <div class="col-2">
+              Возраст: {{ userdiet.age }}
+            </div>
+            <div class="col-2">
+              Вес: {{ userdiet.weight }} кг
+            </div>
+            <div class="col-2">
+                Рост: {{ userdiet.height }} см
+            </div>
+          </div>
         <p>Диета опубликована: <a class="text-decoration-none" href="{% url 'dietcalc:change_published_my_diet' pk=userdiet.id %}">{% if userdiet.is_published %}<span class="btn btn-sm btn-outline-success">Да</span> {% else %} <span class="btn btn-sm btn-outline-danger">Нет</span> </a>{% endif %}<p>
         <p>{% if userdiet.is_published %} <a class="text-decoration-none" href="https://oanews.ru{% url 'dietcalc:public_diet_view' slug=userdiet.slug %}">https://oanews.ru{% url 'dietcalc:public_diet_view' slug=userdiet.slug %}</a>{% endif %}</p>
         <form method="post" action="{% url 'dietcalc:add_food_to_diet' %}">
@@ -90,22 +102,35 @@
             <tr>
                 <th scope="row">Суммарно в день\Кг</th>
                 <td></td>
-                <td>{{ diets_aggregate.sum_protein_weight|floatformat:1  }}</td>
-                <td>{{ diets_aggregate.sum_fat_weight|floatformat:1 }}</td>
-                <td>{{ diets_aggregate.sum_carbohydrates_weight|floatformat:1 }}</td>
+                <td>{{ diets_aggregate.sum_protein_weight|floatformat:2  }}</td>
+                <td>{{ diets_aggregate.sum_fat_weight|floatformat:2 }}</td>
+                <td>{{ diets_aggregate.sum_carbohydrates_weight|floatformat:2 }}</td>
                 <td>{{ diets_aggregate.sum_calories_weight|floatformat:0 }}</td>
                 <td></td>
             </tr>
             <tr>
+                <th scope="row">Натурального белка г\Кг:</th>
+                <td></td>
+                <td>{{ diets_aggregate.sum_protein_nature_weight|floatformat:2 }}</td>
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <th scope="row">Белок из спец смеси г\Кг:</th>
+                <td></td>
+                <td>{{ diets_aggregate.sum_protein_amino_weight|floatformat:2 }}</td>
+                <td colspan="4"></td>
+            </tr>
+            <tr>
                 <th scope="row">Энергия в %</th>
                 <td></td>
-                <td><small>{{ diets_aggregate.procent_protein|floatformat:0}}%</small></td>
-                <td><small>{{ diets_aggregate.procent_fat|floatformat:0 }}%</small></td>
-                <td><small>{{ diets_aggregate.procent_carbohydrates|floatformat:0 }}%</small></td>
+                <td><small>{{ diets_aggregate.procent_protein|floatformat:1}}%</small></td>
+                <td><small>{{ diets_aggregate.procent_fat|floatformat:1 }}%</small></td>
+                <td><small>{{ diets_aggregate.procent_carbohydrates|floatformat:1 }}%</small></td>
                 <td colspan="2"></td>
             </tr>
           </tbody>
         </table>
+
         {% else %}
             <p>Не добавлено не одного продукта в диету, добавти продукты для расчета</p>
         {% endif %}
