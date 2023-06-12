@@ -60,10 +60,10 @@ class UserDietView(LoginRequiredMixin, DetailView):
                 "procent_carbohydrates": context['diets_aggregate']['sum_carbohydrates'] * 400 /
                                          context['diets_aggregate']['sum_calories'],
                 "sum_protein_weight": float(context['diets_aggregate']['sum_protein']) / context['userdiet'].weight,
-                "sum_protein_nature_weight": float(context['diets_aggregate']['sum_protein_nature']) / context[
-                    'userdiet'].weight,
-                "sum_protein_amino_weight": float(context['diets_aggregate']['sum_protein_amino']) / context[
-                    'userdiet'].weight,
+                "sum_protein_nature_weight": (float(context['diets_aggregate']['sum_protein_nature']) / context[
+                    'userdiet'].weight) if context['diets_aggregate']['sum_protein_nature'] else 0,
+                "sum_protein_amino_weight": (float(context['diets_aggregate']['sum_protein_amino']) / context[
+                    'userdiet'].weight) if context['diets_aggregate']['sum_protein_amino'] else 0,
                 "sum_fat_weight": float(context['diets_aggregate']['sum_fat']) / context['userdiet'].weight,
                 "sum_carbohydrates_weight": float(context['diets_aggregate']['sum_carbohydrates']) / context[
                     'userdiet'].weight,
