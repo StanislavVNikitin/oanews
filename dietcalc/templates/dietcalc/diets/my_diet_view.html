@@ -24,10 +24,14 @@
               Пол: {% if userdiet.gender == 'F' %} Женский {% else %} Мужской {% endif %}
             </div>
             <div class="col-2">
-              Возраст: {{ userdiet.age }}
+                {% if userdiet.age < 5 %}
+                    Возраст: {{ userdiet.age }} лет
+                {% else %}
+                    Возраст: {{ userdiet.age|floatformat:0  }} лет
+                {% endif %}
             </div>
             <div class="col-2">
-              Вес: {{ userdiet.weight }} кг
+                Вес: {{ userdiet.weight }} кг
             </div>
             <div class="col-2">
                 Рост: {{ userdiet.height }} см
