@@ -6,7 +6,7 @@ from dietcalc.models import UserDiet
 class CreateAndUpdateMyDietForm(forms.ModelForm):
     name = forms.CharField(label="Название диеты", widget=forms.TextInput(attrs={'class': 'form-control'}))
     age = forms.IntegerField(label="Возрост", widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    weight = forms.IntegerField(label="Вес", widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    weight = forms.DecimalField(max_digits=4, decimal_places=1, label="Вес", widget=forms.NumberInput(attrs={'class': 'form-control'}))
     height = forms.IntegerField(label="Рост", widget=forms.NumberInput(attrs={'class': 'form-control'}))
 
     class Meta:

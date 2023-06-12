@@ -11,7 +11,7 @@ class UserDiet(models.Model):
     name = models.CharField(max_length=255, verbose_name="Название")
     gender = models.CharField(max_length=1, choices=CustomUser.GENGER_CHOICES, blank=True, verbose_name="Пол")
     age = models.PositiveSmallIntegerField(verbose_name="Возраст")
-    weight = models.PositiveSmallIntegerField(verbose_name="Вес")
+    weight = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Вес')
     height = models.PositiveSmallIntegerField(blank=True, verbose_name="Рост")
     disease = models.ForeignKey('Disease', null=True, on_delete=models.SET_NULL, related_name="disease",
                                 verbose_name="Заболевание")

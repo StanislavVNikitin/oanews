@@ -2,6 +2,7 @@ __all__ = ["MyDietsView", "UserDietView", "PublicDietView"]
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F, Sum, Q
+from decimal import Decimal
 
 from django.views.generic import ListView, DetailView
 from django.http import Http404
@@ -52,22 +53,25 @@ class UserDietView(LoginRequiredMixin, DetailView):
                                                                      food__special_food=True)), sum_fat=Sum('f_fat'),
                                                                  sum_carbohydrates=Sum('f_carbohydrates'),
                                                                  sum_calories=Sum('f_calories'))
-            print(context['diets_aggregate'])
             diet_procent_and_sum_weight = {
                 "procent_protein": context['diets_aggregate']['sum_protein'] * 400 / context['diets_aggregate'][
                     'sum_calories'],
                 "procent_fat": context['diets_aggregate']['sum_fat'] * 910 / context['diets_aggregate']['sum_calories'],
                 "procent_carbohydrates": context['diets_aggregate']['sum_carbohydrates'] * 400 /
                                          context['diets_aggregate']['sum_calories'],
-                "sum_protein_weight": float(context['diets_aggregate']['sum_protein']) / context['userdiet'].weight,
-                "sum_protein_nature_weight": (float(context['diets_aggregate']['sum_protein_nature']) / context[
-                    'userdiet'].weight) if context['diets_aggregate']['sum_protein_nature'] else 0,
-                "sum_protein_amino_weight": (float(context['diets_aggregate']['sum_protein_amino']) / context[
-                    'userdiet'].weight) if context['diets_aggregate']['sum_protein_amino'] else 0,
-                "sum_fat_weight": float(context['diets_aggregate']['sum_fat']) / context['userdiet'].weight,
-                "sum_carbohydrates_weight": float(context['diets_aggregate']['sum_carbohydrates']) / context[
-                    'userdiet'].weight,
-                "sum_calories_weight": context['diets_aggregate']['sum_calories'] / context['userdiet'].weight
+                "sum_protein_weight": Decimal(context['diets_aggregate']['sum_protein']) / Decimal(
+                    context['userdiet'].weight),
+                "sum_protein_nature_weight": (
+                            Decimal(context['diets_aggregate']['sum_protein_nature']) / Decimal(context[
+                                                                                                    'userdiet'].weight)) if
+                context['diets_aggregate']['sum_protein_nature'] else 0,
+                "sum_protein_amino_weight": (Decimal(context['diets_aggregate']['sum_protein_amino']) / Decimal(context[
+                                                                                                                    'userdiet'].weight)) if
+                context['diets_aggregate']['sum_protein_amino'] else 0,
+                "sum_fat_weight": Decimal(context['diets_aggregate']['sum_fat']) / Decimal(context['userdiet'].weight),
+                "sum_carbohydrates_weight": Decimal(context['diets_aggregate']['sum_carbohydrates']) / Decimal(context[
+                                                                                                                   'userdiet'].weight),
+                "sum_calories_weight": context['diets_aggregate']['sum_calories'] / Decimal(context['userdiet'].weight)
             }
             context['diets_aggregate'].update(diet_procent_and_sum_weight)
         return context
@@ -99,20 +103,22 @@ class PublicDietView(DetailView):
                                                                      food__special_food=True)), sum_fat=Sum('f_fat'),
                                                                  sum_carbohydrates=Sum('f_carbohydrates'),
                                                                  sum_calories=Sum('f_calories'))
-            print(context['diets_aggregate'])
             diet_procent_and_sum_weight = {
                 "procent_protein": context['diets_aggregate']['sum_protein'] * 400 / context['diets_aggregate'][
                     'sum_calories'],
                 "procent_fat": context['diets_aggregate']['sum_fat'] * 910 / context['diets_aggregate']['sum_calories'],
                 "procent_carbohydrates": context['diets_aggregate']['sum_carbohydrates'] * 400 /
                                          context['diets_aggregate']['sum_calories'],
-                "sum_protein_weight": float(context['diets_aggregate']['sum_protein']) / context['userdiet'].weight,
-                "sum_protein_nature_weight": float(context['diets_aggregate']['sum_protein_nature']) / context['userdiet'].weight,
-                "sum_protein_amino_weight": float(context['diets_aggregate']['sum_protein_amino']) / context['userdiet'].weight,
-                "sum_fat_weight": float(context['diets_aggregate']['sum_fat']) / context['userdiet'].weight,
-                "sum_carbohydrates_weight": float(context['diets_aggregate']['sum_carbohydrates']) / context[
-                    'userdiet'].weight,
-                "sum_calories_weight": context['diets_aggregate']['sum_calories'] / context['userdiet'].weight
+                "sum_protein_weight": Decimal(context['diets_aggregate']['sum_protein']) / Decimal(
+                    context['userdiet'].weight),
+                "sum_protein_nature_weight": context['diets_aggregate']['sum_protein_nature'] / Decimal(
+                    context['userdiet'].weight) if context['diets_aggregate']['sum_protein_nature'] else 0,
+                "sum_protein_amino_weight": context['diets_aggregate']['sum_protein_amino'] / Decimal(
+                    context['userdiet'].weight) if context['diets_aggregate']['sum_protein_amino'] else 0,
+                "sum_fat_weight": Decimal(context['diets_aggregate']['sum_fat']) / Decimal(context['userdiet'].weight),
+                "sum_carbohydrates_weight": Decimal(context['diets_aggregate']['sum_carbohydrates']) / Decimal(context[
+                                                                                                                   'userdiet'].weight),
+                "sum_calories_weight": context['diets_aggregate']['sum_calories'] / Decimal(context['userdiet'].weight)
             }
             context['diets_aggregate'].update(diet_procent_and_sum_weight)
         return context
