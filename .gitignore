@@ -255,3 +255,9 @@ fabric.properties
 /siteapp/migrations/*
 /dietcalc/migrations/*
 /dietcalc/fixtures/*
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/oanews.ru.iml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml
