@@ -17,7 +17,7 @@ class CreateAndUpdateMyFoodForm(forms.ModelForm):
         diffcalories = float(calories)/calculat_calories
         if (0.98 > diffcalories or diffcalories > 1.02):
             print(diffcalories)
-            errors['calories'] = ValidationError(f'Расчетная сумма энергии от БЖУ отличается более 2% и составляет: {round((diffcalories*100)-100,2)}% от вносимой калорийности. Рассчетная из БЖУ:{int(calculat_calories)}Ккал, вводимая: {int(calories)}Ккал')
+            errors['calories'] = ValidationError(f'Расчетная сумма энергии от БЖУ отличается более 2% и составляет: {abs(round((diffcalories*100)-100,2))}% от вносимой калорийности. Рассчетная из БЖУ:{int(calculat_calories)}Ккал, вводимая: {int(calories)}Ккал')
         if errors:
             raise ValidationError(errors)
 
