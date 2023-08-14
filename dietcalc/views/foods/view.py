@@ -11,6 +11,8 @@ class MyFoodsView(LoginRequiredMixin, ListView):
     model = Food
     template_name = "dietcalc/foods/my_foods_view.html"
     context_object_name = "userfoods"
+    paginate_by = 20
+
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
