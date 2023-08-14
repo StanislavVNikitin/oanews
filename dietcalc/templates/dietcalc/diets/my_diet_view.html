@@ -78,7 +78,7 @@
               <tr>
                   <form method="post" action="{% url 'dietcalc:change_food_in_diet'  pk=item.id %}">
                     {% csrf_token %}
-                <th scope="row">{{ item.food }}</th>
+                      <th scope="row">{% if item.food.user == request.user %} <a href="{% url 'dietcalc:update_my_food'  pk=item.food.id %}" class="text-decoration-none text-dark"> {{ item.food }}</a> {% else %} {{ item.food }} {% endif %}</th>
                 <td><input class="form-control form-control-sm" type="number" name="count" value="{{ item.count }}"></td>
                 <td>{{ item.f_protein|floatformat:1  }}</td>
                 <td>{{ item.f_fat|floatformat:1 }}</td>
