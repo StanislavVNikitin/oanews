@@ -15,6 +15,8 @@ class CreateAndUpdateMyFoodForm(forms.ModelForm):
         calories = self.cleaned_data['calories']
         calculat_calories = float(self.cleaned_data['protein']) * 4 +  float(self.cleaned_data['carbohydrates']) * 4 + float(self.cleaned_data['fat']) * 9
         diffcalories = float(calories)/calculat_calories
+        if ((self.cleaned_data['protein'] + self.cleaned_data['fat'] + self.cleaned_data['carbohydrates']) > 100):
+            errors['protein'] = errors['fat'] = errors['carbohydrates'] = ValidationError('Сумма белков, жиров и углеводов превышает 100гр.')
         if (calculat_calories <= 14 or calories <= 14):
             errors['calories'] = ValidationError('Слишком низкие параметры БЖУ и каллорийности. Проверте данные!')
         elif (calories < 20 and calculat_calories < 20):
@@ -26,6 +28,6 @@ class CreateAndUpdateMyFoodForm(forms.ModelForm):
 
     class Meta:
         model = Food
-        fields = ['name', 'protein', 'carbohydrates', 'fat', 'calories']
+        fields = ['name', 'protein',  'fat', 'carbohydrates', 'calories']
 
 
