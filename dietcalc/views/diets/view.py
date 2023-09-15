@@ -87,7 +87,7 @@ class PublicDietView(DetailView):
         context = super().get_context_data(**kwargs)
         context['menuhome'] = MenuHome.objects.all()
         try:
-            user_diet = UserDiet.objects.get(slug=self.kwargs['slug'], is_published=True)
+            user_diet = UserDiet.objects.get(deleted=False, slug=self.kwargs['slug'], is_published=True)
         except UserDiet.DoesNotExist:
             raise Http404()
         context['title'] = "Диета: " + user_diet.name
