@@ -1,12 +1,11 @@
 __all__ = ["MyFoodsView", "UserFoodView", "ajax_food"]
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import JsonResponse
-from django.middleware.csrf import CsrfViewMiddleware
-from django.template.defaulttags import csrf_token
 from django.views.generic import ListView, DetailView
-from django.views.decorators.csrf import csrf_protect, requires_csrf_token, csrf_exempt
+
 
 from siteapp.models import MenuHome
 
@@ -42,6 +41,7 @@ class UserFoodView(LoginRequiredMixin, DetailView):
         context['menuhome'] = MenuHome.objects.all()
         return context
 
+@login_required()
 def ajax_food(request, user_pk):
     if (request.GET['term'] and not request.GET['term'] == ""):
         ajax_foods = Food.objects.filter(
