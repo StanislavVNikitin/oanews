@@ -25,8 +25,9 @@
 
 </div>
 
-<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
-
+{% block javascript %}
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}
 
 </body>
 </html>
