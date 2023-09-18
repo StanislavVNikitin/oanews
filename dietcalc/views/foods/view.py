@@ -43,9 +43,13 @@ class UserFoodView(LoginRequiredMixin, DetailView):
         return context
 
 def ajax_food(request, user_pk):
-    ajax_foods = Food.objects.filter(
-        Q(Q(deleted=False) & (Q(is_published=True) | Q(user__pk=user_pk))) & Q(
-            name__iregex=request.GET['term'])).order_by('-special_food', 'name')
+    if (request.GET['term'] and not request.GET['term'] == ""):
+        ajax_foods = Food.objects.filter(
+            Q(Q(deleted=False) & (Q(is_published=True) | Q(user__pk=user_pk))) & Q(
+                name__iregex=request.GET['term'])).order_by('-special_food', 'name')
+    else:
+        ajax_foods = Food.objects.filter(
+            Q(Q(deleted=False) & (Q(is_published=True) | Q(user__pk=user_pk)))).order_by('-special_food', 'name')
     data = {food.name: {'label': food.name, 'id': food.pk} for food in ajax_foods}
     if request.method == 'GET':
         return JsonResponse(data)
