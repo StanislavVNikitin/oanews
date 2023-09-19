@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F, Sum, Q
 from decimal import Decimal
 
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
 from django.http import Http404
 
@@ -37,6 +38,9 @@ class UserDietView(LoginRequiredMixin, DetailView):
     context_object_name = "userdiet"
 
     def get_context_data(self, *, object_list=None, **kwargs):
+        if not UserDiet.objects.get(slug=self.kwargs['slug']).user == self.request.user:
+            raise  Http404()
+
         context = super().get_context_data(**kwargs)
         context['menuhome'] = MenuHome.objects.all()
         context['foods'] = Food.objects.filter(
