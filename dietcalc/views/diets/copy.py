@@ -51,7 +51,6 @@ def copy_my_diet_to_user(request, pk):
     if request.user.is_staff:
         if request.method == 'POST':
             if UserDiet.objects.get(pk=pk).user == request.user:
-                print(request.POST)
                 form = CopyMyDietToUserForm(request.POST)
                 if form.is_valid():
                     new_slug_userdiet = slugify(form.cleaned_data['name'])[:90] + '-' + ''.join(
