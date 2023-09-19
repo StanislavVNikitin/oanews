@@ -3,6 +3,7 @@ __all__ = ["copy_my_diet", "copy_my_diet_to_user"]
 import string
 import random
 
+from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from pytils.translit import slugify
@@ -13,7 +14,7 @@ from dietcalc.forms import CreateAndUpdateMyDietForm
 
 from dietcalc.models import UserDiet, Diet
 
-
+@login_required()
 def copy_my_diet(request, pk):
     if request.method == 'POST':
         if UserDiet.objects.get(pk=pk).user == request.user:
@@ -46,7 +47,7 @@ def copy_my_diet(request, pk):
         else:
             raise Http404()
 
-
+@login_required()
 def copy_my_diet_to_user(request, pk):
     if request.user.is_staff:
         if request.method == 'POST':
