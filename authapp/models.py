@@ -65,6 +65,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = _("Пользователь")
         verbose_name_plural = _("Пользователи")
 
+    def __str__(self):
+        str_user = ""
+        if not self.last_name == "":
+            str_user += self.last_name + " "
+        if not self.first_name == "":
+            str_user += self.first_name + " "
+        str_user += " (" + self.username +") "
+        str_user += "email: " + self.email
+        return str_user
+
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
