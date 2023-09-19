@@ -24,6 +24,6 @@ class CreateMyDiet(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.slug = slugify(self.object.name)[:90] + '-' + ''.join(
-            random.choices(string.ascii_uppercase + string.ascii_lowercase, k=10))
+        self.object.slug = slugify(self.object.name)[:35] + '-' + ''.join(
+            random.choices(string.ascii_uppercase + string.ascii_lowercase, k=14))
         return super().form_valid(form)
