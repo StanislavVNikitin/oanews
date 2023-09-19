@@ -19,8 +19,8 @@ def copy_my_diet(request, pk):
         if UserDiet.objects.get(pk=pk).user == request.user:
             form = CreateAndUpdateMyDietForm(request.POST)
             if form.is_valid():
-                new_slug_userdiet = slugify(form.cleaned_data['name'])[:90] + '-' + ''.join(
-                    random.choices(string.ascii_uppercase + string.ascii_lowercase, k=12))
+                new_slug_userdiet = slugify(form.cleaned_data['name'])[:50] + '-' + ''.join(
+                    random.choices(string.ascii_uppercase + string.ascii_lowercase, k=10))
                 data_user_diet = {**form.cleaned_data, **{'user_id': request.user.id, 'slug': new_slug_userdiet}}
                 new_user_diet = UserDiet.objects.create(**data_user_diet)
                 contains_food_in_diet = Diet.objects.filter(user_diet_id=pk, food__deleted=False)
@@ -53,7 +53,7 @@ def copy_my_diet_to_user(request, pk):
             if UserDiet.objects.get(pk=pk).user == request.user:
                 form = CopyMyDietToUserForm(request.POST)
                 if form.is_valid():
-                    new_slug_userdiet = slugify(form.cleaned_data['name'])[:90] + '-' + ''.join(
+                    new_slug_userdiet = slugify(form.cleaned_data['name'])[:50] + '-' + ''.join(
                         random.choices(string.ascii_uppercase + string.ascii_lowercase, k=10))
                     data_user_diet = {**form.cleaned_data, **{'user': form.cleaned_data['user'], 'slug': new_slug_userdiet}}
                     new_user_diet = UserDiet.objects.create(**data_user_diet)
