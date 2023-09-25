@@ -43,6 +43,20 @@ class PageView(DetailView):
         self.object.refresh_from_db()
         return context
 
+class PageView(DetailView):
+    model = Page
+    template_name = "siteapp/page.html"
+    context_object_name = "page"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menuhome'] = MenuHome.objects.all()
+        context['description'] = "Cтраница "
+        self.object.views = F('views')  + 1
+        self.object.save()
+        self.object.refresh_from_db()
+        return context
+
 class ContactPage(ListView):
     model = Page
     template_name = "siteapp/contacts.html"
@@ -52,6 +66,28 @@ class ContactPage(ListView):
         context['page'] = get_object_or_404(Page, slug='contacts')
         context['menuhome'] = MenuHome.objects.all()
         context['description'] = "Cтраница с информацией для связи."
+        return context
+
+
+class DescriptionDiasesVideoPage(ListView):
+    model = Page
+    template_name = "siteapp/page_video_view.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menuhome'] = MenuHome.objects.all()
+        context['video_url'] = "description-of-diseases-mma-pa.mp4"
+        context['description'] = "Видеоролик описания заболевания."
+        return context
+class CalculationDietVideoPage(ListView):
+    model = Page
+    template_name = "siteapp/page_video_view.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menuhome'] = MenuHome.objects.all()
+        context['video_url'] = "calculation-of-the-diet-on-the-calculator.mp4"
+        context['description'] = "Видеоролик описания заболевания."
         return context
 
 def contact_sendmail(request):

@@ -7,6 +7,8 @@ app_name = SiteappConfig.name
 
 urlpatterns = [
     path("", Home.as_view(), name="home"),
+    path("page/description-of-diseases", DescriptionDiasesVideoPage.as_view()),
+    path("page/calculation-of-the-diet", CalculationDietVideoPage.as_view()),
     path("page/<str:slug>", PageView.as_view(), name="page_slug"),
     path("pagesvyaz-obratnaya/", contact_sendmail, name="page_site_svyaz_obratnaya"),
     path("userstore/<str:slug>", UserStoreDetail.as_view(), name="user_store"),
