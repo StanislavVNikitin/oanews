@@ -22,7 +22,7 @@ class Home(ListView):
         context = super().get_context_data(**kwargs)
         context['menuhome'] = MenuHome.objects.all()
         context['title'] = "Органические ацидемии"
-        context['description'] = "Главная страница "
+        context['description'] = "Пациентское сообщество метилмалоновой ацедимии и пропионовой ацедимии"
         return context
 
     def get_queryset(self):
