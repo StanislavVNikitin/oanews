@@ -14,7 +14,7 @@
     <div class="container py-4">
 
         <h3>Пересчет гидрокарбоната натрия(сода): </h3>
-        <input type="number" class="form-control" id="volumeBicarbonat" value="" placeholder="укажите объем 4% гидрокарбоната натрия в мл">
+        <input type="number" min="0" max="1000" class="form-control" id="volumeBicarbonat" value="" placeholder="укажите объем 4% гидрокарбоната натрия в мл">
         <div class="form-check form-switch my-3">
             <input class="form-check-input type_checkbox" type="checkbox" role="switch" id="typeСalculation">
             <label class="form-check-label" id="labelTypeСalculation" for="typeСalculation">4% -> 5%</label>
@@ -37,7 +37,7 @@
                         var procent = 4;
                         $('#labelTypeСalculation').text('5% -> 4%')
                         $('#volumeBicarbonat').attr("placeholder", "укажите объем 5% гидрокарбоната натрия в мл").blur();
-                        var volume_calc = volume * 1.2;
+                        var volume_calc = volume * 1.25;
                      } else {
                         var procent = 5;
                         $('#labelTypeСalculation').text('4% -> 5%')
@@ -59,6 +59,9 @@
                  calc();
                 }
               });
+            $('#volumeBicarbonat').on( "change", function() {
+                calc()
+            });
             $('#btnCalc').click(function(){
                 calc();
             });
