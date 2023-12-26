@@ -173,6 +173,6 @@ def print_diet_pdf(request, pk):
     html = render_to_string('dietcalc/diets/my_diet_pdf.html',
                             {'userdiet': context})
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'filename=Userdiet_{user_diet.id}_{user_diet.slug[0:50]}.pdf'
-    weasyprint.HTML(string=html).write_pdf(response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT + '/css/pdf.css')])
+    response['Content-Disposition'] = f'filename=Userdiet_{user_diet.id}_{user_diet.slug[0:(len(user_diet.slug)-16)]}.pdf'
+    weasyprint.HTML(string=html).write_pdf(response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / '/css/pdf.css')])
     return response
