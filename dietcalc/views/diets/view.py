@@ -137,7 +137,7 @@ class PublicDietView(DetailView):
 def print_diet_pdf(request, pk):
     context = {}
     user_diet = get_object_or_404(UserDiet, id=pk)
-    if user_diet.user_diet.user == request.user:
+    if user_diet.user == request.user:
         context['userdiet']=user_diet
         context['title'] = "Диета: " + user_diet.name
         context_diets = Diet.objects.filter(user_diet_id=user_diet.id, food__deleted=False).annotate(
