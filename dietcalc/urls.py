@@ -19,6 +19,7 @@ urlpatterns = [
     path('delete_food_to_diet/<int:pk>/', delete_food_to_diet, name='delete_food_to_diet'),
     path('change_food_in_diet/<int:pk>/', change_food_in_diet, name='change_food_in_diet'),
     path("change_published_my_userdiet/<int:pk>/", ChangePublicMyUserDiet.as_view(), name="change_published_my_diet"),
+    path('print/<int:pk>/pdf/', print_diet_pdf,name='print_diet_pdf'),
     path("public/<str:slug>/", PublicDietView.as_view(), name="public_diet_view"),
     path("create_my_food/", CreateMyFood.as_view(), name="create_my_food"),
     path("update_my_food/<int:pk>/", UpdateMyFood.as_view(), name="update_my_food"),

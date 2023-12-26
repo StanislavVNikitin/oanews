@@ -1,0 +1,102 @@
+<html>
+<body>
+<h6><small>PDF с генерировал диет.калькулятор: <a href="https://oanews.ru">oanews.ru</a></small></h6>
+<div class="section">
+    <div class="container">
+
+        <h3>{{ userdiet.userdiet.name }}</h3>
+          <div class="row">
+              <div class="col-4">
+               Заболевание:  <b>{{ userdiet.userdiet.disease.name }}</b>
+            </div>
+            <div class="col-2">
+              Пол: {% if userdiet.userdiet.gender == 'F' %} Женский {% else %} Мужской {% endif %}
+            </div>
+            <div class="col-2">
+                {% if userdiet.userdiet.age < 5 %}
+                    Возраст: {{ userdiet.userdiet.age }} лет
+                {% else %}
+                    Возраст: {{ userdiet.userdiet.age|floatformat:0  }} лет
+                {% endif %}
+            </div>
+            <div class="col-2">
+              Вес: {{ userdiet.userdiet.weight }} кг
+            </div>
+            <div class="col-2">
+                Рост: {{ userdiet.userdiet.height }} см
+            </div>
+          </div>
+        {% if userdiet.diets.count > 0 %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-7">Продукт</th>
+              <th class="col-1">К-во(грамм)</th>
+              <th class="col-1">Б</th>
+              <th class="col-1">Ж</th>
+              <th class="col-1">У</th>
+              <th class="col-1">Ккал</th>
+            </tr>
+          </thead>
+          <tbody>
+
+        {% for item in userdiet.diets %}
+              <tr>
+                <th scope="row">{{ item.food }}</th>
+                <td style="text-align: center">{{ item.count }}</td>
+                <td>{{ item.f_protein|floatformat:1  }}</td>
+                <td>{{ item.f_fat|floatformat:1 }}</td>
+                <td>{{ item.f_carbohydrates|floatformat:1 }}</td>
+                <td>{{ item.f_calories|floatformat:0 }}</td>
+              </tr>
+        {% endfor %}
+            <tr>
+            <td colspan="6"></td>
+            </tr>
+            <tr>
+                <th scope="row">Суммарно в день</th>
+                <td></td>
+                <th>{{ userdiet.diets_aggregate.sum_protein|floatformat:1  }}</th>
+                <th>{{ userdiet.diets_aggregate.sum_fat|floatformat:1 }}</th>
+                <th>{{ userdiet.diets_aggregate.sum_carbohydrates|floatformat:1 }}</th>
+                <th>{{ userdiet.diets_aggregate.sum_calories|floatformat:0 }}</th>
+            </tr>
+            <tr>
+                <th scope="row">Суммарно в день\Кг</th>
+                <td></td>
+                <td>{{ userdiet.diets_aggregate.sum_protein_weight|floatformat:2  }}</td>
+                <td>{{ userdiet.diets_aggregate.sum_fat_weight|floatformat:2 }}</td>
+                <td>{{ userdiet.diets_aggregate.sum_carbohydrates_weight|floatformat:2 }}</td>
+                <td>{{ userdiet.diets_aggregate.sum_calories_weight|floatformat:0 }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Натурального белка г\Кг:</th>
+                <td></td>
+                <td>{{ userdiet.diets_aggregate.sum_protein_nature_weight|floatformat:2 }}</td>
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <th scope="row">Белок из спец смеси г\Кг:</th>
+                <td></td>
+                <td>{{ userdiet.diets_aggregate.sum_protein_amino_weight|floatformat:2 }}</td>
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <th scope="row">Энергия в %</th>
+                <td></td>
+                <td><small>{{ userdiet.diets_aggregate.procent_protein|floatformat:1 }}%</small></td>
+                <td><small>{{ userdiet.diets_aggregate.procent_fat|floatformat:1 }}%</small></td>
+                <td><small>{{ userdiet.diets_aggregate.procent_carbohydrates|floatformat:1 }}%</small></td>
+                <td></td>
+            </tr>
+          </tbody>
+        </table>
+        {% else %}
+            <p>Диета пустая</p>
+        {% endif %}
+
+    </div>
+
+  </div>
+</body>
+</html>

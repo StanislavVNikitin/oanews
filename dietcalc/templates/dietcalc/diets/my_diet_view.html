@@ -17,6 +17,7 @@
         <a href="{% url 'dietcalc:special_food_calc' %}" type="button" class="btn btn-sm btn-outline-success">Рассчитать количество спец.смеси</a>
         <a href="{% url 'dietcalc:create_my_food' %}" type="button" class="btn btn-sm btn-outline-primary">Добавить новый продукт</a>
         <a href="{% url 'dietcalc:copy_my_diet'  pk=userdiet.pk %}" type="button" class="btn btn-sm btn-outline-success">Копировать диету</a>
+        <a href="{% url 'dietcalc:print_diet_pdf'  pk=userdiet.pk %}" type="button" class="btn btn-sm btn-outline-dark">Сохранить в PDF</a>
         {% if user.is_staff %}
            <a href="{% url 'dietcalc:copy_my_diet_to_user'  pk=userdiet.pk %}" type="button" class="btn btn-sm btn-outline-success">Поделится диетой</a>
         {% endif %}
