@@ -174,5 +174,5 @@ def print_diet_pdf(request, pk):
                             {'userdiet': context})
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename=Userdiet_{user_diet.id}_{user_diet.slug[0:(len(user_diet.slug)-16)]}.pdf'
-    weasyprint.HTML(string=html).write_pdf(response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / '/css/pdf.css')])
+    weasyprint.HTML(string=html).write_pdf(response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / 'css/pdf.css')])
     return response
