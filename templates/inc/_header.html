@@ -10,30 +10,35 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+<!--                <li class="nav-item">
                     <a class="nav-link" href="{% url 'blog:home' %}">Блог</a>
-                </li>
-                    {% load mptt_tags %}
+                </li>-->
+                {% load mptt_tags %}
                         {% recursetree menuhome %}
-                            {% if node.divider %}
+                          {% if node.divider %}
                                 <li><hr class="dropdown-divider"></li>
                             {% else %}
-                                <li {% if not node.is_leaf_node %} class="nav-item dropdown" {% endif %}>
-                                    <a class="{% if not node.is_leaf_node %} nav-link dropdown-toggle {% else %} dropdown-item {% endif %} {% if node.disabled %} disabled {%endif%}" href="{{ node.get_absolute_url }}" {% if not node.is_leaf_node %} id="navbarDropdown1" role="button"
-                                       data-bs-toggle="dropdown" aria-expanded="false" {% endif %}>{{ node.name }}</a>
-                                        {% if not node.is_leaf_node %}
-                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                                <li>{{ children }}</li>
+                                    <li {% if not node.is_leaf_node and node.level == 0%}class="nav-item dropdown"{%elif not node.is_leaf_node and node.level > 0 %}class="nav-item dropend"{%elif node.is_leaf_node and node.level == 0 %}class="nav-item"{% endif %}>
+                                    <a class="{% if not node.is_leaf_node and node.level == 0%}nav-link dropdown-toggle{%elif not node.is_leaf_node and node.level > 0 %}dropdown-item dropdown-toggle{%elif node.is_leaf_node and node.level > 0 %}dropdown-item{% else %}nav-link{% endif %}{% if node.disabled %} disabled {%endif%}"
+                                       {% if node.is_url%}href="{{ node.get_absolute_url }}"{%endif%} {% if not node.is_leaf_node and node.level == 0%} role="button" aria-expanded="false" {% endif %} {% if not node.is_leaf_node%} data-bs-toggle="dropdown" data-bs-auto-close="outside"{% endif %}>{{ node.name }}</a>
+                                        {% if not node.is_leaf_node and node.level == 0 %}
+                                            <ul class="dropdown-menu">
+                                                 <li>{{ children }}</li>
                                             </ul>
+                                        {%elif not node.is_leaf_node and node.level > 0 %}
+                                            <ul class="dropdown-menu dropdown-togle" data-bs-popper="static">
+                                                 <li>{{ children }}</li>
+                                            </ul>
+
                                         {% endif %}
                                 </li>
                             {% endif %}
                         {% endrecursetree %}
 
 
-                <li class="nav-item">
+<!--                <li class="nav-item">
                     <a href="{% url 'siteapp:page_site_svyaz_obratnaya' %}"  class="nav-link">Koнтакты</a>
-                </li>
+                </li>-->
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a href="{% url 'siteapp:user_stores_list' %}"  class="nav-link">Истории</a>

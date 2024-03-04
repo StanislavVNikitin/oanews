@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
@@ -35,6 +36,7 @@ class Page(models.Model):
 
 class MenuHome(MPTTModel):
     name = models.CharField(max_length=50, unique=True)
+    url = models.CharField(verbose_name='Url',blank=True, max_length=255)
     divider = models.BooleanField(default=False, verbose_name='Разделитель')
     disabled = models.BooleanField(default=False, verbose_name='Выключение')
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
@@ -43,7 +45,17 @@ class MenuHome(MPTTModel):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("siteapp:page_slug", kwargs={"slug": Page.objects.get(menuitem=self.pk).slug})
+        if self.url:
+            return self.url
+        else:
+            return reverse("siteapp:page_slug", kwargs={"slug": Page.objects.get(menuitem=self.pk).slug})
+
+    def is_url(self):
+        if not self.get_absolute_url() == '':
+            return True
+        else:
+            return False
+
     class MPTTMeta:
         order_insertion_by = ['name']
 
