@@ -1,4 +1,4 @@
-__all__ = ["MyDietsView", "UserDietView", "PublicDietView","print_diet_pdf"]
+__all__ = ["MyDietsView", "UserDietView", "PublicDietView","print_diet_pdf","SearchMyDietsView"]
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -179,3 +179,24 @@ def print_diet_pdf(request, pk):
         return response
     else:
         raise Http404()
+
+
+class SearchMyDietsView(LoginRequiredMixin, ListView):
+    model = UserDiet
+    template_name = "dietcalc/diets/my_diets_view.html"
+    context_object_name = "userdiets"
+    paginate_by = 10
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return UserDiet.objects.filter(deleted=False, user=self.request.user, name__icontains=self.request.GET.get('s'))
+        else:
+            return self
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Мои диеты"
+        context['menuhome'] = MenuHome.objects.all()
+        context['search'] = self.request.GET.get('s')
+        context['s'] = f"s={self.request.GET.get('s')}&"
+        return context

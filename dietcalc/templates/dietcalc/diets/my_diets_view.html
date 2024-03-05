@@ -9,33 +9,54 @@
 
 
 <div class="section">
-
     <div class="container py-4">
-        {% if userdiets.count > 0 %}
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Название</th>
-                <th scope="col">Опрубликовано</th>
-                <th scope="col">Изменить</th>
-                <th scope="col">Удалить</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for userdiet in userdiets %}
-            <tr>
-                <td class="col-9"><a href="{% url 'dietcalc:diet_view' slug=userdiet.slug %}" class="text-dark text-decoration-none">{{ userdiet.name }}</a></td>
-                <td class="col-1"><a class="text-decoration-none" href="{% url 'dietcalc:change_published_my_diet' pk=userdiet.id %}">{% if userdiet.is_published %}<span class="btn btn-sm btn-outline-success">Да</span> {% else %} <span class="btn btn-sm btn-outline-danger">Нет</span> </a> {% endif %}</td>
-                <td class="col-1"><a href="{% url 'dietcalc:update_my_diet' pk=userdiet.id %}" type="button" class="btn btn-sm btn-success">Изменить</a></td>
-                <td class="col-1"><a href="{% url 'dietcalc:delete_my_diet' pk=userdiet.id %}" type="button" class="btn btn-sm btn-danger">Удалить</a></td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% include 'inc/_pagination.html' %}
-        {% else %}
-            <p>Пока нет не одной добавленной вами диеты.</p>
-        {% endif %}
+        <div class="row">
+            <div class="col-12">
+                {% if not search %}
+                <form action="{% url 'dietcalc:search'%}">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Введите строку для поиска по диетам" name="s">
+                        <button class="btn btn-outline-secondary" type="submit">Поиск по диетам</button>
+                    </div>
+                </form>
+                {%else%}
+                <div class="search_text">
+                    <p class="h3"> Результат поиска : <span class="fw-light">{{ search }}</span></p>
+                    <a href="{% url 'dietcalc:mydiets'%}" class="btn btn-outline-secondary">Вернутся ко всем диетам</a>
+                </div>
+                {%endif%}
+
+            </div>
+            <div class="col-12">
+                {% if userdiets.count > 0 %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Название</th>
+                        <th scope="col">Опрубликовано</th>
+                        <th scope="col">Изменить</th>
+                        <th scope="col">Удалить</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for userdiet in userdiets %}
+                    <tr>
+                        <td class="col-9"><a href="{% url 'dietcalc:diet_view' slug=userdiet.slug %}" class="text-dark text-decoration-none">{{ userdiet.name }}</a></td>
+                        <td class="col-1"><a class="text-decoration-none" href="{% url 'dietcalc:change_published_my_diet' pk=userdiet.id %}">{% if userdiet.is_published %}<span class="btn btn-sm btn-outline-success">Да</span> {% else %} <span class="btn btn-sm btn-outline-danger">Нет</span> </a> {% endif %}</td>
+                        <td class="col-1"><a href="{% url 'dietcalc:update_my_diet' pk=userdiet.id %}" type="button" class="btn btn-sm btn-success">Изменить</a></td>
+                        <td class="col-1"><a href="{% url 'dietcalc:delete_my_diet' pk=userdiet.id %}" type="button" class="btn btn-sm btn-danger">Удалить</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% include 'inc/_pagination.html' %}
+                {% else %}
+                    <p>Пока нет не одной добавленной вами диеты.</p>
+                {% endif %}
+
+            </div>
+        </div>
+
 
         <a href="{% url 'dietcalc:create_my_diet' %}" type="button" class="btn btn-success mb-3">Добавить диету</a>
     </div>

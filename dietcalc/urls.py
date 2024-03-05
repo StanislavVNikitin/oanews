@@ -7,6 +7,7 @@ app_name = DietcalcConfig.name
 
 urlpatterns = [
     path("", MyDietsView.as_view(), name="mydiets"),
+    path("search/", SearchMyDietsView.as_view(), name="search"),
     path("ajaxfood/<int:user_pk>/", ajax_food, name="ajax_food"),
     path("calc_bicarbonate/", CalcBicarbonate.as_view() , name="calc_bicarbonate"),
     path("calc_lcarnitine/", CalcLCarnitine.as_view() , name="calc_bicarbonate"),
