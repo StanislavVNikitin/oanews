@@ -33,8 +33,8 @@
         function calc(){
           var weight = $('#weight').val();
           volume_calc = weight / 3;
-                     if (weight){
-                          $('#volumeTransfer').text('На вес '  + weight +'кг необходимо: '  + volume_calc.toFixed(1) + ' мл в сутки 30% L-карнитина');
+                     if (weight > 0){
+                          $('#volumeTransfer').html('На вес '  + weight +'кг необходимо:  <span class="text-danger">'  + volume_calc.toFixed(1) + ' мл</span> в сутки 30% L-карнитина');
                      }else{
                         $('#volumeTransfer').text('')
                      }
