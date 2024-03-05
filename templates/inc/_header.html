@@ -61,7 +61,7 @@
                         <img src="{% static 'assets/img/default_avatar.svg' %}" alt="mdo" width="32" height="32" class="rounded-circle">
                           {% endif %}
                       </a>
-                      <ul class="dropdown-menu text-small" style="">
+                      <ul class="dropdown-menu dropdown-menu-end text-small" style="">
                         <li><p class="dropdown-item"><b>{% if user.get_full_name %} {{ user.get_full_name }} {% else %} {{ user }} {% endif %}</b></p></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url 'siteapp:my_user_stores_list' %}">Мои истории</a></li>
