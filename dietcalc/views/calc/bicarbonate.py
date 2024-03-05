@@ -11,4 +11,5 @@ class CalcBicarbonate(TemplateView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menuhome'] = MenuHome.objects.all()
+        context['title'] = 'Калькулятор для пересчета гидрокарбоната натрия(сода)'
         return context
