@@ -27,11 +27,11 @@
                                     <a class="{% if not node.is_leaf_node and node.level == 0%}nav-link dropdown-toggle{%elif not node.is_leaf_node and node.level > 0 %}dropdown-item dropdown-toggle{%elif node.is_leaf_node and node.level > 0 %}dropdown-item{% else %}nav-link{% endif %}{% if node.disabled %} disabled {%endif%}"
                                        {% if node.is_url%}href="{{ node.get_absolute_url }}"{%endif%} {% if not node.is_leaf_node and node.level == 0%} role="button" aria-expanded="false" {% endif %} {% if not node.is_leaf_node%} data-bs-toggle="dropdown" data-bs-auto-close="outside"{% endif %}>{{ node.name }}</a>
                                         {% if not node.is_leaf_node and node.level == 0 %}
-                                            <ul class="dropdown-menu">
+                                            <ul class="dropdown-menu  dropdown-menu-dark">
                                                  <li>{{ children }}</li>
                                             </ul>
                                         {%elif not node.is_leaf_node and node.level > 0 %}
-                                            <ul class="dropdown-menu dropdown-togle" data-bs-popper="static">
+                                            <ul class="dropdown-menu dropdown-menu-dark dropdown-togle" data-bs-popper="static">
                                                  <li>{{ children }}</li>
                                             </ul>
 
