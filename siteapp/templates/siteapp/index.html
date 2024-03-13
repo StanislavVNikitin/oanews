@@ -33,9 +33,8 @@
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-3">
             {% for post in posts %}
-                <div class="col">
+            <div class="col">
                 <div class="card h-100">
-                    <img src="{%if post.photo%}{{post.photo.url}}{%else%}{%static 'assets/img/no_photo.png'%}{%endif%}" class="card-img-top" alt="{{post.title}}">
                     <div class="card-body">
                         <h5 class="card-title">{{post.title|truncatewords:5}}</h5>
                         <p class="card-text">{{post.content|truncatewords_html:10|safe}}</p>
@@ -51,7 +50,8 @@
         <div class="row mb-2">
             <div class="col-12">
                 <h6 class="section-title">
-                    <a href="{%url 'blog:home' %}" class="card-link link-secondary text-decoration-none">Все новости...</a>
+                    <a href="{%url 'blog:home' %}" class="card-link link-secondary text-decoration-none">Все
+                        новости...</a>
                 </h6>
             </div>
         </div>
