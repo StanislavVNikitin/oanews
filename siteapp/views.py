@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView, CreateView, DeleteView, UpdateView
 from django.core.mail import send_mail
+
+from blog.models import Post
 from .forms import ContactForm, MyUserStoreForm, ChangePublicUserStoreForm
 from .models import Page, MenuHome, UserStore
 from django.contrib import messages
@@ -21,6 +23,7 @@ class Home(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menuhome'] = MenuHome.objects.all()
+        context["posts"] = Post.objects.all()[:4]
         context['title'] = "Органические ацидемии"
         context['description'] = "Пациентское сообщество метилмалоновой ацидемии и пропионовой ацидемии"
         return context

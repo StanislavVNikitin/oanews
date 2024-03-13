@@ -8,13 +8,57 @@
 {% block content %}
 
 
-  <div class="section">
+<div class="section">
 
     <div class="container py-4">
 
-      {{ page.content|safe }}
+        {{ page.content|safe }}
 
     </div>
 
-  </div>
+</div>
+
+{%if posts.count > 0 %}
+<section class="news py-2">
+    <div class="container pb-5">
+        <div class="row mb-2">
+            <div class="col-12">
+                <h2 class="section-title">
+                            <span>
+                                Последнии новости
+                            </span>
+
+                </h2>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-3">
+            {% for post in posts %}
+                <div class="col">
+                <div class="card h-100">
+                    <img src="{%if post.photo%}{{post.photo.url}}{%else%}{%static 'assets/img/no_photo.png'%}{%endif%}" class="card-img-top" alt="{{post.title}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{post.title|truncatewords:4}}</h5>
+                        <p class="card-text">{{post.content|truncatewords_html:10|safe}}</p>
+                    </div>
+                    <div class="card-footer d-flex  justify-content-between">
+                        <a href="{{ post.get_absolute_url }}" class="card-link link-secondary text-decoration-none">Читать...</a>
+                        <small class="text-secondary text-body-secondary">{{ post.created_at|date:"j E Y" }}</small>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <h6 class="section-title">
+                    <a href="{%url 'blog:home' %}" class="card-link link-secondary text-decoration-none">Все новости...</a>
+                </h6>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+{%endif%}
+
 {% endblock %}
