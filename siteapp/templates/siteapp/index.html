@@ -34,12 +34,12 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-3">
             {% for post in posts %}
             <div class="col">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">{{post.title|truncatewords:5}}</h5>
-                        <p class="card-text">{{post.content|truncatewords_html:10|safe}}</p>
+                <div class="post-card card h-100">
+                    <div class="card-body post-card-body">
+                        <h5 class="post-card-title">{{post.title}}</h5>
+                        <div class="post-card-text">{{post.content|safe}}</div>
                     </div>
-                    <div class="card-footer d-flex  justify-content-between">
+                    <div class="card-footer d-flex  justify-content-between post-card-footer">
                         <a href="{{ post.get_absolute_url }}" class="card-link link-secondary text-decoration-none">Читать...</a>
                         <small class="text-secondary text-body-secondary">{{ post.created_at|date:"j E Y" }}</small>
                     </div>

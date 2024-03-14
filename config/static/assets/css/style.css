@@ -45,6 +45,37 @@
 
 }
 
+/* ========================== Post card ==================================*/
+.post-card {
+    transition: all .3s;
+    border: 1px solid var(grey);
+    border-radius: 0;
+    position:relative;
+}
+
+.post-card:hover {
+    box-shadow: 0 10px 20px -15px rgba(0,0,0,.75);
+}
+
+.post-card-body .post-card-title {
+    height:45px;
+    overflow:hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.post-card-body .post-card-text {
+    height:90px;
+    overflow:hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+
+/* ========================== Post card ==================================*/
+
 @media only screen and (min-width: 1200px) {
     .navbar .dropdown-menu-end {
         margin-left: 0;
