@@ -58,7 +58,7 @@
 }
 
 .post-card-body .post-card-title {
-    height:45px;
+    height:50px;
     overflow:hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -66,7 +66,7 @@
 }
 
 .post-card-body .post-card-text {
-    height:90px;
+    height:100px;
     overflow:hidden;
     display: -webkit-box;
     -webkit-line-clamp: 4;
