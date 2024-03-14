@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse, reverse_lazy
+from bs4 import BeautifulSoup
 
 class Category(models.Model):
     title = models.CharField(max_length=255, verbose_name="Название")
@@ -60,6 +61,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("blog:post", kwargs={"slug": self.slug})
+
+    def get_content_no_html(self):
+        soup = BeautifulSoup(self.content, 'html.parser')
+        return soup.get_text()
 
     class Meta:
         verbose_name = "Статья"

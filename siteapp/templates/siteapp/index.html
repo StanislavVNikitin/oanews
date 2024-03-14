@@ -37,7 +37,7 @@
                 <div class="post-card card h-100">
                     <div class="card-body post-card-body">
                         <a href="{{ post.get_absolute_url }}" class="link-dark text-decoration-none"><h5 class="card-title post-card-title">{{post.title}}</h5></a>
-                        <div class="card-text post-card-text">{{post.content|safe}}</div>
+                        <p class="card-text post-card-text">{{post.get_content_no_html}}</p>
                     </div>
                     <div class="card-footer d-flex  justify-content-between post-card-footer">
                         <a href="{{ post.get_absolute_url }}" class="card-link link-secondary text-decoration-none">Читать...</a>
