@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse, reverse_lazy
 from bs4 import BeautifulSoup
+from django.utils import timesince
 
 class Category(models.Model):
     title = models.CharField(max_length=255, verbose_name="Название")
@@ -65,6 +66,10 @@ class Post(models.Model):
     def get_content_no_html(self):
         soup = BeautifulSoup(self.content, 'html.parser')
         return soup.get_text()
+
+    @property
+    def timesince(self):
+        return timesince.timesince(self.created_at)
 
     class Meta:
         verbose_name = "Статья"

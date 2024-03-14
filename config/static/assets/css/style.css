@@ -45,6 +45,10 @@
 
 }
 
+.main-class {
+    margin-bottom:70px;
+}
+
 /* ========================== Post card ==================================*/
 .post-card {
     transition: all .3s;
@@ -72,6 +76,11 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
+
+.justify {
+    text-align: justify;
+}
+
 
 
 /* ========================== Post card ==================================*/

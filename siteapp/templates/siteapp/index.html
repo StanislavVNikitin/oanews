@@ -23,12 +23,12 @@
     <div class="container">
         <div class="row mb-2">
             <div class="col-12">
-                <h2 class="section-title">
+                <h3 class="section-title">
                             <span>
                                 Последнии новости
                             </span>
 
-                </h2>
+                </h3>
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-3">
@@ -37,11 +37,11 @@
                 <div class="post-card card h-100">
                     <div class="card-body post-card-body">
                         <a href="{{ post.get_absolute_url }}" class="link-dark text-decoration-none"><h5 class="card-title post-card-title">{{post.title}}</h5></a>
-                        <p class="card-text post-card-text">{{post.get_content_no_html}}</p>
+                        <p class="card-text post-card-text justify">{{post.get_content_no_html|truncatewords:20}}</p>
                     </div>
-                    <div class="card-footer d-flex  justify-content-between post-card-footer">
+                    <div class="card-footer d-flex justify-content-between post-card-footer">
                         <a href="{{ post.get_absolute_url }}" class="card-link link-secondary text-decoration-none">Читать...</a>
-                        <small class="text-secondary text-body-secondary">{{ post.created_at|date:"j E Y" }}</small>
+                        <small class="text-secondary text-body-secondary">{{ post.timesince }}</small>
                     </div>
                 </div>
             </div>
