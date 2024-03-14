@@ -41,7 +41,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between post-card-footer">
                         <a href="{{ post.get_absolute_url }}" class="card-link link-secondary text-decoration-none">Читать...</a>
-                        <small class="text-secondary text-body-secondary">{{ post.timesince }}</small>
+                        <small class="text-secondary text-body-secondary">{{ post.created_at|timesince }}</small>
                     </div>
                 </div>
             </div>
